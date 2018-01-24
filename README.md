@@ -1,8 +1,9 @@
 # Interactive Cleanup Project
 
-This is a Unity project for the competition of Interactive Cleanup.  
+This is a Unity project for the Interactive Cleanup task of the Partner Robot Challenge (Virtual Space) in the World Robot Competition.
+
 Please prepare a common unitypackage in advance, and import the unitypackage to this project.  
-For details of creating the common unitypackage, please see the following link.  
+For details of using the common unitypackage, please see an instruction in the following repository:
 https://github.com/PartnerRobotChallengeVirtual/common-unity.git
 
 ## Prerequisites
