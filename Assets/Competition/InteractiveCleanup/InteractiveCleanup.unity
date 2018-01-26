@@ -12725,7 +12725,7 @@ MonoBehaviour:
   bodyAnchor: {fileID: 588166686}
   fixedParts:
   - {fileID: 1227776495}
-  animatorMoveSpeed: 1
+  animatorMoveSpeed: 4
 --- !u!4 &536172262
 Transform:
   m_ObjectHideFlags: 0
