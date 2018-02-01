@@ -53,7 +53,8 @@ SIGVerse window will be opened.
 
 ## How to Execute Interactive Cleanup Program
 
-Please start the ROS side application beforehand.
+Please start the ROS side application beforehand.  
+By default, given 2 attempts.
 
 ### Execute On Unity Editor
 1. Double click "Assets/Competition/InteractiveCleanup/InteractiveCleanup(.unity)" in Project window.
