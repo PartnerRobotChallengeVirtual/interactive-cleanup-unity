@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 namespace SIGVerse.Competition.InteractiveCleanup
 {
 	[RequireComponent(typeof (CleanupPlaybackCommon))]
@@ -16,13 +15,12 @@ namespace SIGVerse.Competition.InteractiveCleanup
 				this.enabled = false;
 			}
 		}
-
-		// Use this for initialization
-		void Start()
+		
+		public bool Initialize(int numberOfTrials)
 		{
-			CleanupPlaybackCommon common = this.GetComponent<CleanupPlaybackCommon>();
+			string filePath = string.Format(Application.dataPath + CleanupPlaybackCommon.FilePathFormat, numberOfTrials);
 
-			this.targetTransforms = common.GetTargetTransforms();
+			return this.Initialize(filePath);
 		}
 	}
 }

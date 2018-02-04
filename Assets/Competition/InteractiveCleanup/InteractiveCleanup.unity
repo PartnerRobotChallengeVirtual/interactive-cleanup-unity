@@ -1455,6 +1455,8 @@ MonoBehaviour:
   - DummyGraspingCandidates
   - DestinationCandidates
   - PlaybackTarget
+  playbackTargetFromChildrenTags:
+  - Moderator
 --- !u!4 &68156982
 Transform:
   m_ObjectHideFlags: 0
@@ -8427,12 +8429,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fbddf4b61ce1754b9bf9c082e1723f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outputTimeMeasurements: 0
-  createChildGameObject: 1
-  avoidGapsInside: 0
-  avoidExceedingMesh: 0
-  boxesPerEdge: 20
-  physicsMaterialForColliders: {fileID: 0}
 --- !u!114 &313701637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17047,6 +17043,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a54aa837527d4f48b09b180f41d76ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playbackTargetTags: []
+  playbackTargetFromChildrenTags:
+  - Moderator
 --- !u!1 &740334133
 GameObject:
   m_ObjectHideFlags: 0
@@ -40201,12 +40200,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fbddf4b61ce1754b9bf9c082e1723f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outputTimeMeasurements: 0
-  createChildGameObject: 1
-  avoidGapsInside: 0
-  avoidExceedingMesh: 0
-  boxesPerEdge: 20
-  physicsMaterialForColliders: {fileID: 0}
 --- !u!114 &1628180082
 MonoBehaviour:
   m_ObjectHideFlags: 0

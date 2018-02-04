@@ -1,22 +1,18 @@
-using System.Collections.Generic;
 using UnityEngine;
 using SIGVerse.ToyotaHSR;
-using System.Linq;
 
 namespace SIGVerse.Competition.InteractiveCleanup
 {
 	public class CleanupPlaybackCommon : WorldPlaybackCommon
 	{
-		public List<string> playbackTargetTags;
+		public const string FilePathFormat = "/../SIGVerseConfig/InteractiveCleanup/Playback{0:D2}.dat";
 
-		void Awake()
+		protected override void Awake()
 		{
-			WorldPlaybackCommon.filePathFormat = "/../SIGVerseConfig/InteractiveCleanup/Playback{0:D2}.dat";
-
-			this.targetTransforms = new List<Transform>();
+			base.Awake();
 
 			// Robot
-			Transform robot     = GameObject.FindGameObjectWithTag("Robot").transform;
+			Transform robot = GameObject.FindGameObjectWithTag("Robot").transform;
 
 			this.targetTransforms.Add(robot);
 
@@ -31,27 +27,6 @@ namespace SIGVerse.Competition.InteractiveCleanup
 			this.targetTransforms.Add(HSRCommon.FindGameObjectFromChild(robot, HSRCommon.TorsoLiftLinkName));
 			this.targetTransforms.Add(HSRCommon.FindGameObjectFromChild(robot, HSRCommon.HandLProximalLinkName));
 			this.targetTransforms.Add(HSRCommon.FindGameObjectFromChild(robot, HSRCommon.HandRProximalLinkName));
-
-			// Moderator
-			Transform moderator = GameObject.FindGameObjectWithTag("Moderator").transform;
-
-			Transform[] moderatorTransforms = moderator.GetComponentsInChildren<Transform>(true);
-
-			foreach (Transform moderatorTransform in moderatorTransforms)
-			{
-				this.targetTransforms.Add(moderatorTransform);
-			}
-
-			// Additional
-			foreach (string playbackTargetTag in playbackTargetTags)
-			{
-				GameObject[] playbackTargetObjects = GameObject.FindGameObjectsWithTag(playbackTargetTag);
-
-				foreach(GameObject playbackTargetObject in playbackTargetObjects)
-				{
-					this.targetTransforms.Add(playbackTargetObject.transform);
-				}
-			}
 		}
 	}
 }

@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 namespace SIGVerse.Competition.InteractiveCleanup
 {
 	[RequireComponent(typeof (CleanupPlaybackCommon))]
@@ -30,17 +29,11 @@ namespace SIGVerse.Competition.InteractiveCleanup
 			}
 		}
 
-		// Use this for initialization
-		void Start()
+		public bool Initialize()
 		{
-			CleanupPlaybackCommon common = this.GetComponent<CleanupPlaybackCommon>();
+			string filePath = string.Format(Application.dataPath + CleanupPlaybackCommon.FilePathFormat, 0);
 
-			this.targetTransforms = common.GetTargetTransforms();
-
-			foreach (Transform targetTransform in targetTransforms)
-			{
-				this.targetObjectsPathMap.Add(CleanupPlaybackCommon.GetLinkPath(targetTransform), targetTransform);
-			}
+			return this.Initialize(filePath);
 		}
 	}
 }
