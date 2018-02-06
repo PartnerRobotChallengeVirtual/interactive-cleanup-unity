@@ -1457,6 +1457,7 @@ MonoBehaviour:
   - PlaybackTarget
   playbackTargetFromChildrenTags:
   - Moderator
+  recordVideoPlayers: 0
 --- !u!4 &68156982
 Transform:
   m_ObjectHideFlags: 0
@@ -8319,7 +8320,6 @@ GameObject:
   - component: {fileID: 313701632}
   - component: {fileID: 313701634}
   - component: {fileID: 313701635}
-  - component: {fileID: 313701636}
   - component: {fileID: 313701637}
   m_Layer: 0
   m_Name: sidetable_A_1
@@ -8418,17 +8418,6 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: c9037f1a2a34d844f81b5a4703fbaab2, type: 3}
---- !u!114 &313701636
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 313701630}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fbddf4b61ce1754b9bf9c082e1723f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &313701637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40071,7 +40060,6 @@ GameObject:
   - component: {fileID: 1628180078}
   - component: {fileID: 1628180077}
   - component: {fileID: 1628180076}
-  - component: {fileID: 1628180081}
   - component: {fileID: 1628180082}
   m_Layer: 0
   m_Name: wagon_c02
@@ -40189,17 +40177,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1628180074}
   m_Mesh: {fileID: 4300000, guid: 5d9e279627f418842aa14b0298695208, type: 3}
---- !u!114 &1628180081
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1628180074}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fbddf4b61ce1754b9bf9c082e1723f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1628180082
 MonoBehaviour:
   m_ObjectHideFlags: 0

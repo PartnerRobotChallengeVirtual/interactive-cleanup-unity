@@ -3,7 +3,7 @@ using SIGVerse.ToyotaHSR;
 
 namespace SIGVerse.Competition.InteractiveCleanup
 {
-	public class CleanupPlaybackCommon : WorldPlaybackCommon
+	public class CleanupPlaybackCommon : TrialPlaybackCommon
 	{
 		public const string FilePathFormat = "/../SIGVerseConfig/InteractiveCleanup/Playback{0:D2}.dat";
 

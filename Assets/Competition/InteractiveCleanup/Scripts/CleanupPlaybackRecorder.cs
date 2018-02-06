@@ -3,7 +3,7 @@ using UnityEngine;
 namespace SIGVerse.Competition.InteractiveCleanup
 {
 	[RequireComponent(typeof (CleanupPlaybackCommon))]
-	public class CleanupPlaybackRecorder : WorldPlaybackRecorder
+	public class CleanupPlaybackRecorder : TrialPlaybackRecorder
 	{
 		void Awake()
 		{

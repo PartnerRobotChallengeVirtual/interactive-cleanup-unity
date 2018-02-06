@@ -3,7 +3,7 @@ using UnityEngine;
 namespace SIGVerse.Competition.InteractiveCleanup
 {
 	[RequireComponent(typeof (CleanupPlaybackCommon))]
-	public class CleanupPlaybackPlayer : WorldPlaybackPlayer
+	public class CleanupPlaybackPlayer : TrialPlaybackPlayer
 	{
 		void Awake()
 		{
@@ -11,7 +11,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 			{
 				Transform robot = GameObject.FindGameObjectWithTag("Robot").transform;
 
-				robot.Find("CompetitionScripts").gameObject.SetActive(false);
+//				robot.Find("CompetitionScripts").gameObject.SetActive(false);
 				robot.Find("RosBridgeScripts")  .gameObject.SetActive(false);
 
 				GameObject mainMenu = GameObject.FindGameObjectWithTag("MainMenu");

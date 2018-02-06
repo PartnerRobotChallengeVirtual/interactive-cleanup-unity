@@ -108,12 +108,12 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		}
 
 
-		protected override void ReadLine(string[] headerArray, string dataStr)
+		protected override void ReadData(string[] headerArray, string dataStr)
 		{
 			// Motion data
 			if (headerArray[1] == WorldPlaybackCommon.DataType1Transform)
 			{
-				base.ReadTransform(headerArray, dataStr);
+				base.ReadTransforms(headerArray, dataStr);
 			}
 			// Pointing Event data
 			else
