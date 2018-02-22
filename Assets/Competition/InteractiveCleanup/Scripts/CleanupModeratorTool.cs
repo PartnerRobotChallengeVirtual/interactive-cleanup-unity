@@ -59,7 +59,6 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		private CleanupAvatarMotionPlayer   avatarMotionPlayer;
 		private CleanupAvatarMotionRecorder avatarMotionRecorder;
 
-		private CleanupPlaybackPlayer   playbackPlayer;
 		private CleanupPlaybackRecorder playbackRecorder;
 
 
@@ -288,7 +287,6 @@ namespace SIGVerse.Competition.InteractiveCleanup
 			this.avatarMotionPlayer   = avatarMotionPlayback.GetComponent<CleanupAvatarMotionPlayer>();
 			this.avatarMotionRecorder = avatarMotionPlayback.GetComponent<CleanupAvatarMotionRecorder>();
 
-			this.playbackPlayer   = worldPlayback.GetComponent<CleanupPlaybackPlayer>();
 			this.playbackRecorder = worldPlayback.GetComponent<CleanupPlaybackRecorder>();
 		}
 
@@ -471,13 +469,9 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 		public void InitializePlayback()
 		{
-			if(CleanupConfig.Instance.configFileInfo.playbackType == CleanupPlaybackCommon.PlaybackTypeRecord)
+			if(CleanupConfig.Instance.configFileInfo.playbackType == WorldPlaybackCommon.PlaybackTypeRecord)
 			{
 				this.playbackRecorder.Initialize(CleanupConfig.Instance.numberOfTrials);
-			}
-			if(CleanupConfig.Instance.configFileInfo.playbackType == CleanupPlaybackCommon.PlaybackTypePlay)
-			{
-				this.playbackPlayer.Initialize();
 			}
 
 			switch (this.executionMode)
@@ -503,13 +497,9 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 		public bool IsPlaybackInitialized()
 		{
-			if(CleanupConfig.Instance.configFileInfo.playbackType == CleanupPlaybackCommon.PlaybackTypeRecord)
+			if(CleanupConfig.Instance.configFileInfo.playbackType == WorldPlaybackCommon.PlaybackTypeRecord)
 			{
 				if(!this.playbackRecorder.IsInitialized()) { return false; }
-			}
-			if(CleanupConfig.Instance.configFileInfo.playbackType == CleanupPlaybackCommon.PlaybackTypePlay)
-			{
-				if(!this.playbackPlayer.IsInitialized()) { return false; }
 			}
 
 			switch (this.executionMode)
@@ -537,17 +527,11 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 		public void StartPlayback()
 		{
-			if(CleanupConfig.Instance.configFileInfo.playbackType == CleanupPlaybackCommon.PlaybackTypeRecord)
+			if(CleanupConfig.Instance.configFileInfo.playbackType == WorldPlaybackCommon.PlaybackTypeRecord)
 			{
 				bool isStarted = this.playbackRecorder.Record();
 
 				if(!isStarted) { SIGVerseLogger.Warn("Cannot start the world playback recording"); }
-			}
-			if(CleanupConfig.Instance.configFileInfo.playbackType == CleanupPlaybackCommon.PlaybackTypePlay)
-			{
-				bool isStarted = this.playbackPlayer.Play();
-
-				if(!isStarted) { SIGVerseLogger.Warn("Cannot start the world playback playing"); }
 			}
 
 			switch (this.executionMode)
@@ -578,17 +562,11 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 		public void StopPlayback()
 		{
-			if (CleanupConfig.Instance.configFileInfo.playbackType == CleanupPlaybackCommon.PlaybackTypeRecord)
+			if (CleanupConfig.Instance.configFileInfo.playbackType == WorldPlaybackCommon.PlaybackTypeRecord)
 			{
 				bool isStopped = this.playbackRecorder.Stop();
 
 				if(!isStopped) { SIGVerseLogger.Warn("Cannot stop the world playback recording"); }
-			}
-			if (CleanupConfig.Instance.configFileInfo.playbackType == CleanupPlaybackCommon.PlaybackTypePlay)
-			{
-				bool isStopped = this.playbackPlayer.Stop();
-
-				if(!isStopped) { SIGVerseLogger.Warn("Cannot stop the world playback playing"); }
 			}
 
 			this.StopAvatarMotionPlayback();
@@ -624,14 +602,9 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 		public bool IsPlaybackFinished()
 		{
-			if(CleanupConfig.Instance.configFileInfo.playbackType == CleanupPlaybackCommon.PlaybackTypeRecord)
+			if(CleanupConfig.Instance.configFileInfo.playbackType == WorldPlaybackCommon.PlaybackTypeRecord)
 			{
 				if(!this.playbackRecorder.IsFinished()) { return false; }
-			}
-
-			if(CleanupConfig.Instance.configFileInfo.playbackType == CleanupPlaybackCommon.PlaybackTypePlay)
-			{
-				if(!this.playbackPlayer.IsFinished()) { return false; }
 			}
 
 			switch (this.executionMode)

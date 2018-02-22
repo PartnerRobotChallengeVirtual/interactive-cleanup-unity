@@ -5,22 +5,18 @@ namespace SIGVerse.Competition.InteractiveCleanup
 	[RequireComponent(typeof (CleanupPlaybackCommon))]
 	public class CleanupPlaybackRecorder : TrialPlaybackRecorder
 	{
-		void Awake()
+		protected override void Awake()
 		{
-			if(CleanupConfig.Instance.configFileInfo.playbackType == CleanupPlaybackCommon.PlaybackTypeRecord)
-			{
-			}
-			else
-			{
-				this.enabled = false;
-			}
+			base.isRecord = CleanupConfig.Instance.configFileInfo.playbackType == CleanupPlaybackCommon.PlaybackTypeRecord;
+
+			base.Awake();
 		}
 		
 		public bool Initialize(int numberOfTrials)
 		{
 			string filePath = string.Format(Application.dataPath + CleanupPlaybackCommon.FilePathFormat, numberOfTrials);
 
-			return this.Initialize(filePath);
+			return base.Initialize(filePath);
 		}
 	}
 }

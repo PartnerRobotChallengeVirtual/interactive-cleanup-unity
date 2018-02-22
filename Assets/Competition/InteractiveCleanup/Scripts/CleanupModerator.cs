@@ -26,7 +26,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		WaitForNextTask,
 	}
 
-	public class CleanupModerator : MonoBehaviour, IRosMsgReceiveHandler, IAvatarMotionHandler
+	public class CleanupModerator : MonoBehaviour, IRosMsgReceiveHandler, IAvatarMotionHandler, ITimeIsUpHandler, IGiveUpHandler
 	{
 		private const int SendingAreYouReadyInterval = 1000;
 
@@ -53,8 +53,9 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 		public List<GameObject> environments;
 
+		public CleanupScoreManager scoreManager;
 		public GameObject avatarMotionPlayback;
-		public GameObject worldPlayback;
+		public GameObject playbackManager;
 
 		public Laser laserLeft;
 		public Laser laserRight;
@@ -64,8 +65,8 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		private CleanupModeratorTool tool;
 		private StepTimer stepTimer;
 
-		private CleanupMenu cleanupMenu;
-		private CleanupScoreManager scoreManager;
+		private GameObject mainMenu;
+		private PanelMainController mainPanelController;
 
 
 		private ExecutionMode executionMode;
@@ -87,19 +88,12 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 				this.stepTimer = new StepTimer();
 
-				this.tool.InitPlaybackVariables(this.avatarMotionPlayback, this.worldPlayback);
+				this.tool.InitPlaybackVariables(this.avatarMotionPlayback, this.playbackManager);
 
 				this.executionMode = this.tool.GetExecutionMode();
 
-				GameObject mainMenu = GameObject.FindGameObjectWithTag("MainMenu");
-
-				this.cleanupMenu  = mainMenu.GetComponent<CleanupMenu>();
-				this.scoreManager = mainMenu.GetComponent<CleanupScoreManager>();
-
-				if(this.executionMode==ExecutionMode.Competition)
-				{
-					this.scoreManager.SetTaskMessageText(this.tool.GetTaskDetail());
-				}
+				this.mainMenu = GameObject.FindGameObjectWithTag("MainMenu");
+				this.mainPanelController = mainMenu.GetComponent<PanelMainController>();
 			}
 			catch (Exception exception)
 			{
@@ -118,8 +112,11 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 			this.isAllTaskFinished = false;
 			this.interruptedReason = string.Empty;
-			this.noticeHideTime    = 0.0f;
 
+			if(this.executionMode==ExecutionMode.Competition)
+			{
+				this.mainPanelController.SetTaskMessageText(this.tool.GetTaskDetail());
+			}
 
 			List<GameObject> graspables = this.tool.GetGraspables();
 
@@ -141,11 +138,11 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 		private void PreProcess()
 		{
-			this.scoreManager.SetChallengeInfoText();
+			this.mainPanelController.SetChallengeInfoText(CleanupConfig.Instance.numberOfTrials);
 
-			SIGVerseLogger.Info("##### " + this.scoreManager.GetChallengeInfoText() + " #####");
+			SIGVerseLogger.Info("##### " + this.mainPanelController.GetChallengeInfoText() + " #####");
 
-			this.scoreManager.ResetTimeLeftText();
+			this.mainPanelController.ResetTimeLeftText();
 
 
 			this.receivedMessageMap = new Dictionary<string, bool>();
@@ -183,7 +180,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 				{
 					SIGVerseLogger.Info("Failed '" + this.interruptedReason + "'");
 
-					this.ShowNotice("Failed\n"+ interruptedReason.Replace('_',' '), 100, RedColor);
+					this.SendPanelNotice("Failed\n"+ interruptedReason.Replace('_',' '), 100, PanelNoticeStatus.Red);
 
 					this.GoToNextTaskTaskFailed(this.interruptedReason);
 				}
@@ -263,7 +260,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 							
 							if(this.executionMode == ExecutionMode.DataGeneration)
 							{
-								this.scoreManager.SetTaskMessageText(this.tool.GetTaskDetail());
+								this.mainPanelController.SetTaskMessageText(this.tool.GetTaskDetail());
 
 								StartCoroutine(this.tool.SaveEnvironmentInfo());
 							}
@@ -321,7 +318,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 							if (isSucceeded)
 							{
 								SIGVerseLogger.Info("Succeeded '" + MsgTaskFinished + "'");
-								this.ShowNotice("Succeeded!", 150, GreenColor);
+								this.SendPanelNotice("Succeeded!", 150, PanelNoticeStatus.Green);
 								this.scoreManager.AddScore(Score.Type.CleanupSuccess);
 
 								this.GoToNextTaskTaskSucceeded();
@@ -329,7 +326,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 							else
 							{
 								SIGVerseLogger.Info("Failed '" + MsgTaskFinished + "'");
-								this.ShowNotice("Failed", 150, RedColor);
+								this.SendPanelNotice("Failed", 150, PanelNoticeStatus.Red);
 								this.GoToNextTaskTaskFailed("Failed " + MsgTaskFinished);
 							}
 						}
@@ -364,15 +361,6 @@ namespace SIGVerse.Competition.InteractiveCleanup
 			Application.Quit();
 		}
 
-		public void InterruptTimeIsUp()
-		{
-			this.interruptedReason = CleanupModerator.ReasonTimeIsUp;
-		}
-
-		public void InterruptGiveUp()
-		{
-			this.interruptedReason = CleanupModerator.ReasonGiveUp;
-		}
 
 		private void GoToNextTaskTaskSucceeded()
 		{
@@ -409,30 +397,25 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		}
 
 
-
-		private void ShowNotice(string message, int fontSize, Color color)
+		private void SendPanelNotice(string message, int fontSize, Color color)
 		{
-			this.cleanupMenu.notice.SetActive(true);
+			PanelNoticeStatus noticeStatus = new PanelNoticeStatus(message, fontSize, color, 2.0f);
 
-			Text noticeText = this.cleanupMenu.notice.GetComponentInChildren<Text>();
+			// For changing the notice of a panel
+			ExecuteEvents.Execute<IPanelNoticeHandler>
+			(
+				target: this.mainMenu, 
+				eventData: null, 
+				functor: (reciever, eventData) => reciever.OnChange(noticeStatus)
+			);
 
-			noticeText.text     = message;
-			noticeText.fontSize = fontSize;
-			noticeText.color    = color;
-
-			this.noticeHideTime = UnityEngine.Time.time + 2.0f;
-
-			StartCoroutine(this.HideNotice()); // Hide after 2[s]
-		}
-
-		private IEnumerator HideNotice()
-		{
-			while(UnityEngine.Time.time < this.noticeHideTime)
-			{
-				yield return null;
-			}
-
-			this.cleanupMenu.notice.SetActive(false);
+			// For recording
+			ExecuteEvents.Execute<IPanelNoticeHandler>
+			(
+				target: this.playbackManager, 
+				eventData: null, 
+				functor: (reciever, eventData) => reciever.OnChange(noticeStatus)
+			);
 		}
 
 
@@ -468,6 +451,17 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		{
 			this.tool.PressAorX(this.step);
 		} 
+
+
+		public void OnTimeIsUp()
+		{
+			this.interruptedReason = CleanupModerator.ReasonTimeIsUp;
+		}
+
+		public void OnGiveUp()
+		{
+			this.interruptedReason = CleanupModerator.ReasonGiveUp;
+		}
 	}
 }
 
