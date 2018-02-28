@@ -30,9 +30,6 @@ namespace SIGVerse.Competition.InteractiveCleanup
 	{
 		private const int SendingAreYouReadyInterval = 1000;
 
-		private readonly Color GreenColor = new Color(  0/255f, 143/255f, 36/255f, 255/255f);
-		private readonly Color RedColor   = new Color(255/255f,   0/255f,  0/255f, 255/255f);
-
 		private const string MsgAreYouReady     = "Are_you_ready?";
 		private const string MsgPickItUp        = "Pick_it_up!";
 		private const string MsgCleanUp         = "Clean_up!";
@@ -84,11 +81,9 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		{
 			try
 			{
-				this.tool = new CleanupModeratorTool(this.environments);
+				this.tool = new CleanupModeratorTool(this.environments, this.scoreManager, this.avatarMotionPlayback, this.playbackManager);
 
 				this.stepTimer = new StepTimer();
-
-				this.tool.InitPlaybackVariables(this.avatarMotionPlayback, this.playbackManager);
 
 				this.executionMode = this.tool.GetExecutionMode();
 
@@ -273,7 +268,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 					{
 						if (this.receivedMessageMap[MsgTaskFinished])
 						{
-							StartCoroutine(this.tool.UpdateDeploymentStatus(this));
+							StartCoroutine(this.tool.UpdatePlacementStatus(this));
 
 							this.step++;
 						}
@@ -305,9 +300,9 @@ namespace SIGVerse.Competition.InteractiveCleanup
 					}
 					case ModeratorStep.Judgement:
 					{
-						if (this.tool.IsDeploymentCheckFinished())
+						if (this.tool.IsPlacementCheckFinished())
 						{
-							bool isSucceeded = this.tool.IsDeploymentSucceeded();
+							bool isSucceeded = this.tool.IsPlacementSucceeded();
 
 							if (CleanupConfig.Instance.configFileInfo.isAlwaysGoNext)
 							{

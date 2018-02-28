@@ -53,7 +53,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		private bool hasPressedButtonForDataGeneration;
 		private bool hasPointedTarget;
 		private bool hasPointedDestination;
-		private bool? isDeploymentSucceeded;
+		private bool? isPlacementSucceeded;
 
 		
 		private CleanupAvatarMotionPlayer   avatarMotionPlayer;
@@ -62,7 +62,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		private CleanupPlaybackRecorder playbackRecorder;
 
 
-		public CleanupModeratorTool(List<GameObject> environments)
+		public CleanupModeratorTool(List<GameObject> environments, CleanupScoreManager scoreManager, GameObject avatarMotionPlayback, GameObject worldPlayback)
 		{
 			CleanupConfig.Instance.InclementNumberOfTrials();
 
@@ -72,9 +72,9 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 			this.environmentName = environmentInfo.environmentName;
 
-			this.GetGameObjects();
+			this.GetGameObjects(avatarMotionPlayback, worldPlayback);
 
-			this.Initialize(environmentInfo);
+			this.Initialize(environmentInfo, scoreManager);
 		}
 
 
@@ -135,7 +135,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		}
 
 
-		private void GetGameObjects()
+		private void GetGameObjects(GameObject avatarMotionPlayback, GameObject worldPlayback)
 		{
 			this.robot = GameObject.FindGameObjectWithTag("Robot");
 
@@ -191,11 +191,27 @@ namespace SIGVerse.Competition.InteractiveCleanup
 			}
 
 			SIGVerseLogger.Info("Count of Destinations = " + this.destinationCandidates.Count);
+
+			this.avatarMotionPlayer   = avatarMotionPlayback.GetComponent<CleanupAvatarMotionPlayer>();
+			this.avatarMotionRecorder = avatarMotionPlayback.GetComponent<CleanupAvatarMotionRecorder>();
+
+			this.playbackRecorder = worldPlayback.GetComponent<CleanupPlaybackRecorder>();
 		}
 
 
-		public void Initialize(EnvironmentInfo environmentInfo)
+		public void Initialize(EnvironmentInfo environmentInfo, CleanupScoreManager scoreManager)
 		{
+			List<GameObject> objectCollisionDestinations = new List<GameObject>();
+			objectCollisionDestinations.Add(scoreManager.gameObject);
+
+			foreach(GameObject graspable in this.graspables)
+			{
+				CollisionTransferer collisionTransferer = graspable.AddComponent<CollisionTransferer>();
+
+				collisionTransferer.Initialize(objectCollisionDestinations, Score.GetObjectCollisionVeloticyThreshold());
+			}
+
+
 			this.graspablesPositionsMap   = null; //key:GraspablePositionInfo, value:Graspables
 			this.destinationsPositionsMap = null; //key:DestinationPositionInfo, value:DestinationCandidate
 
@@ -228,6 +244,9 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 					if (this.destination == null) { throw new Exception("Destination not found. name=" + environmentInfo.destinationName); }
 
+					// Add a contact checker to the destination
+					this.destination.AddComponent<PlacementChecker>();
+
 					// Destination candidates position map
 					this.destinationsPositionsMap = new Dictionary<RelocatableObjectInfo, GameObject>();
 
@@ -259,7 +278,6 @@ namespace SIGVerse.Competition.InteractiveCleanup
 				}
 			}
 
-
 			foreach (KeyValuePair<RelocatableObjectInfo, GameObject> pair in this.graspablesPositionsMap)
 			{
 				pair.Value.transform.position    = pair.Key.position;
@@ -277,17 +295,9 @@ namespace SIGVerse.Competition.InteractiveCleanup
 			}
 
 			this.hasPressedButtonForDataGeneration = false;
-			this.hasPointedTarget        = false;
-			this.hasPointedDestination   = false;
-			this.isDeploymentSucceeded   = null;
-		}
-
-		public void InitPlaybackVariables(GameObject avatarMotionPlayback, GameObject worldPlayback)
-		{
-			this.avatarMotionPlayer   = avatarMotionPlayback.GetComponent<CleanupAvatarMotionPlayer>();
-			this.avatarMotionRecorder = avatarMotionPlayback.GetComponent<CleanupAvatarMotionRecorder>();
-
-			this.playbackRecorder = worldPlayback.GetComponent<CleanupPlaybackRecorder>();
+			this.hasPointedTarget       = false;
+			this.hasPointedDestination  = false;
+			this.isPlacementSucceeded   = null;
 		}
 
 
@@ -313,37 +323,35 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		}
 
 
-
-
-		public bool IsGraspingCandidate(GameObject target)
-		{
-			foreach(GameObject graspable in this.graspables)
-			{
-				if(graspable == target)
-				{
-					SIGVerseLogger.Info("Grasping target is " + target.name);
-					return true;
-				}
-			}
+		//public bool IsGraspingCandidate(GameObject target)
+		//{
+		//	foreach(GameObject graspable in this.graspables)
+		//	{
+		//		if(graspable == target)
+		//		{
+		//			SIGVerseLogger.Info("Grasping target is " + target.name);
+		//			return true;
+		//		}
+		//	}
 			
-			SIGVerseLogger.Warn("It is a NOT graspable object. name = " + target.name);
-			return false;
-		}
+		//	SIGVerseLogger.Warn("It is a NOT graspable object. name = " + target.name);
+		//	return false;
+		//}
 
-		public bool IsDestinationCandidate(GameObject destination)
-		{
-			foreach(GameObject destinationCandidate in this.destinationCandidates)
-			{
-				if(destinationCandidate == destination)
-				{
-					SIGVerseLogger.Info("Destination is " + destination.name);
-					return true;
-				}
-			}
+		//public bool IsDestinationCandidate(GameObject destination)
+		//{
+		//	foreach(GameObject destinationCandidate in this.destinationCandidates)
+		//	{
+		//		if(destinationCandidate == destination)
+		//		{
+		//			SIGVerseLogger.Info("Destination is " + destination.name);
+		//			return true;
+		//		}
+		//	}
 
-			SIGVerseLogger.Warn("It is a NOT destination candidate. name = " + destination.name);
-			return false;
-		}
+		//	SIGVerseLogger.Warn("It is a NOT destination candidate. name = " + destination.name);
+		//	return false;
+		//}
 
 
 		public void DeactivateGraspingCandidatesPositions()
@@ -421,14 +429,14 @@ namespace SIGVerse.Competition.InteractiveCleanup
 			return this.hasPointedDestination;
 		}
 
-		public bool IsDeploymentCheckFinished()
+		public bool IsPlacementCheckFinished()
 		{
-			return isDeploymentSucceeded != null;
+			return isPlacementSucceeded != null;
 		}
 
-		public bool IsDeploymentSucceeded()
+		public bool IsPlacementSucceeded()
 		{
-			return (bool)isDeploymentSucceeded;
+			return (bool)isPlacementSucceeded;
 		}
 
 
@@ -443,28 +451,25 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		}
 
 
-		public IEnumerator UpdateDeploymentStatus(MonoBehaviour moderator)
+		public IEnumerator UpdatePlacementStatus(MonoBehaviour moderator)
 		{
 			if(this.graspingTarget.transform.root == this.robot.transform.root)
 			{
-				this.isDeploymentSucceeded = false;
+				this.isPlacementSucceeded = false;
 
-				SIGVerseLogger.Info("Target deployment failed: HSR has the grasping target.");
+				SIGVerseLogger.Info("Target placement failed: HSR has the grasping target.");
 			}
 
-//			Debug.Log("UpdateDeploymentStatus start time=" + Time.time);
+//			Debug.Log("UpdatePlacementStatus start time=" + Time.time);
 
-			ContactChecker contactChecker = this.destination.GetComponent<ContactChecker>();
+			PlacementChecker placementChecker = this.destination.GetComponent<PlacementChecker>();
 
-			IEnumerator checkContactCoroutine = contactChecker.IsTargetContact(this.graspingTarget);
+			IEnumerator<bool?> isPlaced = placementChecker.IsPlaced(this.graspingTarget);
 
-			yield return moderator.StartCoroutine(checkContactCoroutine);
+			yield return moderator.StartCoroutine(isPlaced);
 
-			this.isDeploymentSucceeded = (bool)checkContactCoroutine.Current;
-
-			contactChecker.ResetParam();
+			this.isPlacementSucceeded = (bool)isPlaced.Current;
 		}
-
 
 
 		public void InitializePlayback()
@@ -678,6 +683,9 @@ namespace SIGVerse.Competition.InteractiveCleanup
 							{
 								this.hasPointedDestination = true;
 								this.destination           = laser.nearestDestination;
+
+								// Add a contact checker to the destination
+								this.destination.AddComponent<PlacementChecker>();
 							}
 					
 							break;
