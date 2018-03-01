@@ -33,6 +33,14 @@ namespace SIGVerse.Competition.InteractiveCleanup
 	{
 		private const string EnvironmentInfoFileNameFormat = "/../SIGVerseConfig/InteractiveCleanup/EnvironmentInfo{0:D2}.json";
 
+		private const string TagRobot                      = "Robot";
+		private const string TagGraspingCandidates         = "GraspingCandidates";
+		private const string TagDummyGraspingCandidates    = "DummyGraspingCandidates";
+		private const string TagGraspingCandidatesPosition = "GraspingCandidatesPosition";
+		private const string TagDestinationCandidates      = "DestinationCandidates";
+
+		private const string JudgeTriggersName = "JudgeTriggers";
+
 		private string environmentName;
 		private GameObject graspingTarget;
 		private GameObject destination;
@@ -137,20 +145,20 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 		private void GetGameObjects(GameObject avatarMotionPlayback, GameObject worldPlayback)
 		{
-			this.robot = GameObject.FindGameObjectWithTag("Robot");
+			this.robot = GameObject.FindGameObjectWithTag(TagRobot);
 
 			this.hsrGraspingDetector = this.robot.GetComponentInChildren<HSRGraspingDetector>();
 
 			
 			// Get grasping candidates
-			List<GameObject> graspingCandidates = GameObject.FindGameObjectsWithTag("GraspingCandidates").ToList<GameObject>();
+			List<GameObject> graspingCandidates = GameObject.FindGameObjectsWithTag(TagGraspingCandidates).ToList<GameObject>();
 
 			if (graspingCandidates.Count == 0)
 			{
 				throw new Exception("Count of GraspingCandidates is zero.");
 			}
 
-			List<GameObject> dummyGraspingCandidates = GameObject.FindGameObjectsWithTag("DummyGraspingCandidates").ToList<GameObject>();
+			List<GameObject> dummyGraspingCandidates = GameObject.FindGameObjectsWithTag(TagDummyGraspingCandidates).ToList<GameObject>();
 
 			this.graspables = new List<GameObject>();
 
@@ -166,7 +174,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 			SIGVerseLogger.Info("Count of Graspables   = " + this.graspables.Count);
 
 			// Get grasping candidates positions
-			this.graspingCandidatesPositions = GameObject.FindGameObjectsWithTag("GraspingCandidatesPosition").ToList<GameObject>();
+			this.graspingCandidatesPositions = GameObject.FindGameObjectsWithTag(TagGraspingCandidatesPosition).ToList<GameObject>();
 
 			if (graspables.Count > this.graspingCandidatesPositions.Count)
 			{
@@ -177,7 +185,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 				SIGVerseLogger.Info("Count of GraspingCandidatesPosition = " + this.graspingCandidatesPositions.Count);
 			}
 
-			this.destinationCandidates = GameObject.FindGameObjectsWithTag("DestinationCandidates").ToList<GameObject>();
+			this.destinationCandidates = GameObject.FindGameObjectsWithTag(TagDestinationCandidates).ToList<GameObject>();
 
 			if(this.destinationCandidates.Count == 0)
 			{
@@ -323,37 +331,6 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		}
 
 
-		//public bool IsGraspingCandidate(GameObject target)
-		//{
-		//	foreach(GameObject graspable in this.graspables)
-		//	{
-		//		if(graspable == target)
-		//		{
-		//			SIGVerseLogger.Info("Grasping target is " + target.name);
-		//			return true;
-		//		}
-		//	}
-			
-		//	SIGVerseLogger.Warn("It is a NOT graspable object. name = " + target.name);
-		//	return false;
-		//}
-
-		//public bool IsDestinationCandidate(GameObject destination)
-		//{
-		//	foreach(GameObject destinationCandidate in this.destinationCandidates)
-		//	{
-		//		if(destinationCandidate == destination)
-		//		{
-		//			SIGVerseLogger.Info("Destination is " + destination.name);
-		//			return true;
-		//		}
-		//	}
-
-		//	SIGVerseLogger.Warn("It is a NOT destination candidate. name = " + destination.name);
-		//	return false;
-		//}
-
-
 		public void DeactivateGraspingCandidatesPositions()
 		{
 			foreach (GameObject graspingCandidatesPosition in this.graspingCandidatesPositions)
@@ -459,16 +436,16 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 				SIGVerseLogger.Info("Target placement failed: HSR has the grasping target.");
 			}
+			else
+			{
+				PlacementChecker placementChecker = this.destination.GetComponentInChildren<PlacementChecker>();
 
-//			Debug.Log("UpdatePlacementStatus start time=" + Time.time);
+				IEnumerator<bool?> isPlaced = placementChecker.IsPlaced(this.graspingTarget);
 
-			PlacementChecker placementChecker = this.destination.GetComponent<PlacementChecker>();
+				yield return moderator.StartCoroutine(isPlaced);
 
-			IEnumerator<bool?> isPlaced = placementChecker.IsPlaced(this.graspingTarget);
-
-			yield return moderator.StartCoroutine(isPlaced);
-
-			this.isPlacementSucceeded = (bool)isPlaced.Current;
+				this.isPlacementSucceeded = (bool)isPlaced.Current;
+			}
 		}
 
 
@@ -670,23 +647,22 @@ namespace SIGVerse.Competition.InteractiveCleanup
 					{
 						case ModeratorStep.SendingPickItUpMsg:
 						{
-//							if(CleanupModeratorTools.IsGraspingCandidate(laser.nearestGraspingObject))
-							{
-								this.hasPointedTarget = true;
-								this.graspingTarget   = laser.nearestGraspingObject;
-							}
+							this.hasPointedTarget = true;
+							this.graspingTarget   = laser.nearestGraspingObject;
+
 							break;
 						}
 						case ModeratorStep.SendingCleanUpMsg:
 						{
-//							if(CleanupModeratorTools.IsDestinationCandidate(laser.nearestDestination))
-							{
-								this.hasPointedDestination = true;
-								this.destination           = laser.nearestDestination;
+							this.hasPointedDestination = true;
+							this.destination           = laser.nearestDestination;
 
-								// Add a contact checker to the destination
-								this.destination.AddComponent<PlacementChecker>();
-							}
+							// Add Placement checker to triggers
+							Transform judgeTriggersTransform = this.destination.transform.Find(JudgeTriggersName);
+
+							if (judgeTriggersTransform==null) { throw new Exception("No Judge Triggers object"); }
+
+							judgeTriggersTransform.gameObject.AddComponent<PlacementChecker>();
 					
 							break;
 						}
