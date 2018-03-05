@@ -252,8 +252,13 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 					if (this.destination == null) { throw new Exception("Destination not found. name=" + environmentInfo.destinationName); }
 
-					// Add a contact checker to the destination
-					this.destination.AddComponent<PlacementChecker>();
+					// Add Placement checker to triggers
+					Transform judgeTriggersTransform = this.destination.transform.Find(JudgeTriggersName);
+
+					if (judgeTriggersTransform==null) { throw new Exception("No Judge Triggers object"); }
+
+					judgeTriggersTransform.gameObject.AddComponent<PlacementChecker>();
+
 
 					// Destination candidates position map
 					this.destinationsPositionsMap = new Dictionary<RelocatableObjectInfo, GameObject>();
