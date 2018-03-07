@@ -58,7 +58,7 @@ namespace SIGVerse.Competition
 	{
 		public PlaybackPointingEventList()
 		{
-			base.EventList = new List<PlaybackPointingEvent>();
+			this.EventList = new List<PlaybackPointingEvent>();
 		}
 	}
 
@@ -75,7 +75,7 @@ namespace SIGVerse.Competition
 
 		public override void StartInitializingEvents()
 		{
-			base.eventLists = new List<PlaybackPointingEventList>();
+			this.eventLists = new List<PlaybackPointingEventList>();
 		}
 
 		public override bool ReadEvents(string[] headerArray, string dataStr)
@@ -96,7 +96,7 @@ namespace SIGVerse.Competition
 				PointingEventList.ElapsedTime = float.Parse(headerArray[0]);
 				PointingEventList.EventList.Add(PointingEvent);
 
-				base.eventLists.Add(PointingEventList);
+				this.eventLists.Add(PointingEventList);
 
 				return true;
 			}

@@ -7,7 +7,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 	{
 		protected override void Awake()
 		{
-			base.isRecord = CleanupConfig.Instance.configFileInfo.playbackType == CleanupPlaybackCommon.PlaybackTypeRecord;
+			this.isRecord = CleanupConfig.Instance.configFileInfo.playbackType == CleanupPlaybackCommon.PlaybackTypeRecord;
 
 			base.Awake();
 		}
@@ -16,7 +16,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		{
 			string filePath = string.Format(Application.dataPath + CleanupPlaybackCommon.FilePathFormat, numberOfTrials);
 
-			return base.Initialize(filePath);
+			return this.Initialize(filePath);
 		}
 	}
 }

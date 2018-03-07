@@ -11,11 +11,11 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 		protected override void Awake()
 		{
-			base.isPlay = CleanupConfig.Instance.configFileInfo.playbackType == WorldPlaybackCommon.PlaybackTypePlay;
+			this.isPlay = CleanupConfig.Instance.configFileInfo.playbackType == WorldPlaybackCommon.PlaybackTypePlay;
 
 			base.Awake();
 
-			if(base.isPlay)
+			if(this.isPlay)
 			{
 				Transform robot = GameObject.FindGameObjectWithTag("Robot").transform;
 
@@ -40,11 +40,11 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 		public override void OnReadFileButtonClick()
 		{
-			base.trialNo = int.Parse(base.trialNoInputField.text);
+			this.trialNo = int.Parse(this.trialNoInputField.text);
 
-			string filePath = string.Format(Application.dataPath + CleanupPlaybackCommon.FilePathFormat, base.trialNo);
+			string filePath = string.Format(Application.dataPath + CleanupPlaybackCommon.FilePathFormat, this.trialNo);
 
-			base.Initialize(filePath);
+			this.Initialize(filePath);
 		}
 	}
 }

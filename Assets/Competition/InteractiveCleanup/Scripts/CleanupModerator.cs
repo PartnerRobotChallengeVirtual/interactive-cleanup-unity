@@ -133,9 +133,9 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 		private void PreProcess()
 		{
-			this.mainPanelController.SetChallengeInfoText(CleanupConfig.Instance.numberOfTrials);
+			this.mainPanelController.SetTrialNumberText(CleanupConfig.Instance.numberOfTrials);
 
-			SIGVerseLogger.Info("##### " + this.mainPanelController.GetChallengeInfoText() + " #####");
+			SIGVerseLogger.Info("##### " + this.mainPanelController.GetTrialNumberText() + " #####");
 
 			this.mainPanelController.ResetTimeLeftText();
 
@@ -401,7 +401,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 			(
 				target: this.mainMenu, 
 				eventData: null, 
-				functor: (reciever, eventData) => reciever.OnChange(noticeStatus)
+				functor: (reciever, eventData) => reciever.OnPanelNoticeChange(noticeStatus)
 			);
 
 			// For recording
@@ -409,7 +409,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 			(
 				target: this.playbackManager, 
 				eventData: null, 
-				functor: (reciever, eventData) => reciever.OnChange(noticeStatus)
+				functor: (reciever, eventData) => reciever.OnPanelNoticeChange(noticeStatus)
 			);
 		}
 

@@ -1323,6 +1323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recordInterval: 20
+  mainPanel: {fileID: 308193925}
   scorePanel: {fileID: 308193924}
 --- !u!114 &68156984
 MonoBehaviour:

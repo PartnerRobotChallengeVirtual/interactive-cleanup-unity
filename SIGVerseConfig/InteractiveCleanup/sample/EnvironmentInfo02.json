@@ -1,4 +1,5 @@
 {
+    "taskMessage": "Target=cup_c01,  Destination=trashbox_c02",
     "environmentName": "Environment_01",
     "graspingTargetName": "cup_c01",
     "destinationName": "trashbox_c02",

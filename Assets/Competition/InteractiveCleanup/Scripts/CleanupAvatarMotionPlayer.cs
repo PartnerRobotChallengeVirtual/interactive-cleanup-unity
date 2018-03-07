@@ -15,7 +15,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		{
 			ExecutionMode executionMode = (ExecutionMode)Enum.ToObject(typeof(ExecutionMode), CleanupConfig.Instance.configFileInfo.executionMode);
 
-			base.isPlay = executionMode == ExecutionMode.Competition;
+			this.isPlay = executionMode == ExecutionMode.Competition;
 
 			base.Awake();
 		}
@@ -35,7 +35,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		{
 			string filePath = string.Format(Application.dataPath + CleanupAvatarMotionCommon.FilePathFormat, numberOfTrials);
 
-			return base.Initialize(filePath);
+			return this.Initialize(filePath);
 		}
 
 
@@ -79,12 +79,12 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 		public bool IsInitialized()
 		{
-			return base.isInitialized;
+			return this.isInitialized;
 		}
 
 		public bool IsFinished()
 		{
-			return base.step == Step.Waiting;
+			return this.step == Step.Waiting;
 		}
 	}
 }

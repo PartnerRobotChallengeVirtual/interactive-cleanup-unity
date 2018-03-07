@@ -22,6 +22,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 	[Serializable]
 	public class EnvironmentInfo
 	{
+		public string taskMessage;
 		public string environmentName;
 		public string graspingTargetName;
 		public string destinationName;
@@ -740,6 +741,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		{
 			EnvironmentInfo environmentInfo = new EnvironmentInfo();
 
+			environmentInfo.taskMessage        = this.GetTaskDetail();
 			environmentInfo.environmentName    = this.environmentName;
 			environmentInfo.graspingTargetName = this.graspingTarget.name;
 			environmentInfo.destinationName    = this.destination.name;

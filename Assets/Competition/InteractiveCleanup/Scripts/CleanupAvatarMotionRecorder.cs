@@ -10,7 +10,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		{
 			ExecutionMode executionMode = (ExecutionMode)Enum.ToObject(typeof(ExecutionMode), CleanupConfig.Instance.configFileInfo.executionMode);
 
-			base.isRecord = executionMode == ExecutionMode.DataGeneration;
+			this.isRecord = executionMode == ExecutionMode.DataGeneration;
 
 			base.Awake();
 		}
@@ -19,7 +19,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		{
 			string filePath = string.Format(Application.dataPath + CleanupAvatarMotionCommon.FilePathFormat, numberOfTrials);
 
-			return base.Initialize(filePath);
+			return this.Initialize(filePath);
 		}
 
 		private string GetEventDataLine(string eventType)
