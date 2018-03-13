@@ -9029,6 +9029,7 @@ GameObject:
   m_Component:
   - component: {fileID: 478196220}
   - component: {fileID: 478196221}
+  - component: {fileID: 478196222}
   m_Layer: 31
   m_Name: EthanBody
   m_TagString: Untagged
@@ -9167,6 +9168,18 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.0009998977, y: 0.007603839, z: 0.00028842688}
     m_Extent: {x: 0.80239844, y: 0.23826995, z: 0.5723474}
   m_DirtyAABB: 0
+--- !u!114 &478196222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 478196219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc79b1e968e851d48ac71a896e596b09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  emissionColorBrightness: 0.05
 --- !u!1 &483544129
 GameObject:
   m_ObjectHideFlags: 0
