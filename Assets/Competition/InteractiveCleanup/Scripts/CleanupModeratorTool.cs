@@ -212,6 +212,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		{
 			List<GameObject> objectCollisionDestinations = new List<GameObject>();
 			objectCollisionDestinations.Add(scoreManager.gameObject);
+			objectCollisionDestinations.Add(this.playbackRecorder.gameObject);
 
 			foreach(GameObject graspable in this.graspables)
 			{
