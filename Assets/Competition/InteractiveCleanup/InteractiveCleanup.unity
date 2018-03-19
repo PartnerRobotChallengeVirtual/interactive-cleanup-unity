@@ -1339,8 +1339,6 @@ MonoBehaviour:
   mainPanel: {fileID: 308193925}
   scorePanel: {fileID: 308193924}
   playbackPanel: {fileID: 308193923}
-  collisionEffect: {fileID: 1600245392930048, guid: 3ef8c8ac6a526b644b05d40d67ed7dc8,
-    type: 2}
   playSprite: {fileID: 21300000, guid: e63a23797bffe18499ff2682f037c019, type: 3}
   pauseSprite: {fileID: 21300000, guid: 0735b2e898e701e47b1b251ceafda887, type: 3}
   scoreManager: {fileID: 1856164344}
@@ -5236,6 +5234,14 @@ Prefab:
     - target: {fileID: 4019540231455106, guid: 8e1b067197f952f43bd9961d8b724214, type: 2}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1578478809051070, guid: 8e1b067197f952f43bd9961d8b724214, type: 2}
+      propertyPath: m_TagString
+      value: NonDeductionCollider
+      objectReference: {fileID: 0}
+    - target: {fileID: 1578478809051070, guid: 8e1b067197f952f43bd9961d8b724214, type: 2}
+      propertyPath: m_Name
+      value: non_deduction_colliders
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8e1b067197f952f43bd9961d8b724214, type: 2}
@@ -24510,6 +24516,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1606044325712468, guid: 28c335de0dd39024d91059c3bfa6f234, type: 2}
+      propertyPath: m_Name
+      value: non_deduction_colliders
+      objectReference: {fileID: 0}
+    - target: {fileID: 1606044325712468, guid: 28c335de0dd39024d91059c3bfa6f234, type: 2}
+      propertyPath: m_TagString
+      value: NonDeductionCollider
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 28c335de0dd39024d91059c3bfa6f234, type: 2}
   m_IsPrefabParent: 0
@@ -28684,6 +28698,14 @@ Prefab:
     - target: {fileID: 4290888245140876, guid: bf0d6c6f5aaac404286ddf1c8165bdcd, type: 2}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1515574173676054, guid: bf0d6c6f5aaac404286ddf1c8165bdcd, type: 2}
+      propertyPath: m_Name
+      value: non_deduction_colliders
+      objectReference: {fileID: 0}
+    - target: {fileID: 1515574173676054, guid: bf0d6c6f5aaac404286ddf1c8165bdcd, type: 2}
+      propertyPath: m_TagString
+      value: NonDeductionCollider
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bf0d6c6f5aaac404286ddf1c8165bdcd, type: 2}
