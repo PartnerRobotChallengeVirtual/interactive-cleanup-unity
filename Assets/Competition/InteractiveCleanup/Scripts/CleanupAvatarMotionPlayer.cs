@@ -25,6 +25,9 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		{
 			base.Start();  // Avatar motion data
 
+//			this.transformController.IsRigidbodiesDisable = false;
+			this.transformController.IsCollidersDisable   = false;
+
 			GameObject moderator = GameObject.FindGameObjectWithTag("Moderator");
 
 			this.pointingController = new PlaybackPointingEventController(moderator); // Pointing
