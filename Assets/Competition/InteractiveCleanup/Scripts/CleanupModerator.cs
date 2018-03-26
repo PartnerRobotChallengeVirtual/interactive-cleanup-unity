@@ -455,7 +455,14 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 		public void OnGiveUp()
 		{
-			this.interruptedReason = CleanupModerator.ReasonGiveUp;
+			if(this.step > ModeratorStep.TaskStart && this.step < ModeratorStep.WaitForNextTask)
+			{
+				this.interruptedReason = CleanupModerator.ReasonGiveUp;
+			}
+			else
+			{
+				SIGVerseLogger.Warn("It is a timing not allowed to give up.");
+			}
 		}
 	}
 }
