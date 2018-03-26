@@ -21,6 +21,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		TaskStart,
 		SendingPickItUpMsg,
 		SendingCleanUpMsg,
+		WaitForObjectGrasped,
 		WaitForTaskFinished,
 		Judgement,
 		WaitForNextTask,
@@ -44,6 +45,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 		private const string MsgIamReady      = "I_am_ready";
 		private const string MsgIsThisCorrect = "Is_this_correct?";
+		private const string MsgObjectGrasped = "Object_grasped";
 		private const string MsgTaskFinished  = "Task_finished";
 
 		//-----------------------------
@@ -143,6 +145,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 			this.receivedMessageMap = new Dictionary<string, bool>();
 			this.receivedMessageMap.Add(MsgIamReady,      false);
 			this.receivedMessageMap.Add(MsgIsThisCorrect, false);
+			this.receivedMessageMap.Add(MsgObjectGrasped, false);
 			this.receivedMessageMap.Add(MsgTaskFinished,  false);
 
 			this.tool.InitializePlayback();
@@ -264,15 +267,8 @@ namespace SIGVerse.Competition.InteractiveCleanup
 						}
 						break;
 					}
-					case ModeratorStep.WaitForTaskFinished:
+					case ModeratorStep.WaitForObjectGrasped:
 					{
-						if (this.receivedMessageMap[MsgTaskFinished])
-						{
-							StartCoroutine(this.tool.UpdatePlacementStatus(this));
-
-							this.step++;
-						}
-
 						// Respond to confirmation of correctness
 						if(this.receivedMessageMap[MsgIsThisCorrect])
 						{
@@ -294,6 +290,45 @@ namespace SIGVerse.Competition.InteractiveCleanup
 							}
 
 							this.scoreManager.AddScore(Score.Type.AskedCorrectOrNot);
+						}
+
+
+						if (this.receivedMessageMap[MsgObjectGrasped])
+						{
+							// Check for grasping
+							bool isSucceeded = this.tool.IsObjectGraspedSucceeded();
+
+							if (isSucceeded)
+							{
+								SIGVerseLogger.Info("Succeeded '" + MsgObjectGrasped + "'");
+								this.SendPanelNotice("Good", 150, PanelNoticeStatus.Green);
+								this.scoreManager.AddScore(Score.Type.ObjectGraspedSuccess);
+							}
+							else
+							{
+								SIGVerseLogger.Info("Failed '" + MsgObjectGrasped + "'");
+								this.SendPanelNotice("Failed\n" + MsgObjectGrasped.Replace('_', ' '), 100, PanelNoticeStatus.Red);
+								this.GoToNextTaskTaskFailed("Failed " + MsgObjectGrasped);
+
+								return;
+							}
+
+							this.step++;
+
+							SIGVerseLogger.Info("Waiting for '" + MsgTaskFinished + "'");
+
+							break;
+						}
+
+						break;
+					}
+					case ModeratorStep.WaitForTaskFinished:
+					{
+						if (this.receivedMessageMap[MsgTaskFinished])
+						{
+							StartCoroutine(this.tool.UpdatePlacementStatus(this));
+
+							this.step++;
 						}
 
 						break;
@@ -418,6 +453,27 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		{
 			if(this.receivedMessageMap.ContainsKey(interactiveCleanupMsg.message))
 			{
+				// Check message order
+				if(interactiveCleanupMsg.message==MsgIamReady)
+				{
+					if(this.step!=ModeratorStep.WaitForIamReady) { SIGVerseLogger.Warn("Illegal timing. message : " + interactiveCleanupMsg.message); return; }
+				}
+
+				if(interactiveCleanupMsg.message==MsgIsThisCorrect)
+				{
+					if(this.step!=ModeratorStep.WaitForObjectGrasped) { SIGVerseLogger.Warn("Illegal timing. message : " + interactiveCleanupMsg.message); return; }
+				}
+
+				if(interactiveCleanupMsg.message==MsgObjectGrasped)
+				{
+					if(this.step!=ModeratorStep.WaitForObjectGrasped) { SIGVerseLogger.Warn("Illegal timing. message : " + interactiveCleanupMsg.message); return; }
+				}
+
+				if(interactiveCleanupMsg.message==MsgTaskFinished)
+				{
+					if(this.step!=ModeratorStep.WaitForTaskFinished) { SIGVerseLogger.Warn("Illegal timing. message : " + interactiveCleanupMsg.message); return; }
+				}
+
 				this.receivedMessageMap[interactiveCleanupMsg.message] = true;
 			}
 			else

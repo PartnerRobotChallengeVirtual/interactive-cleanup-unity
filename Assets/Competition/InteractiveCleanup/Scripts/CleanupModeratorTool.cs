@@ -413,6 +413,16 @@ namespace SIGVerse.Competition.InteractiveCleanup
 			return this.hasPointedDestination;
 		}
 
+		public bool IsObjectGraspedSucceeded()
+		{
+			if (this.hsrGraspingDetector.GetGraspedObject() != null)
+			{
+				return this.graspingTarget == this.hsrGraspingDetector.GetGraspedObject();
+			}
+
+			return false;
+		}
+
 		public bool IsPlacementCheckFinished()
 		{
 			return isPlacementSucceeded != null;
@@ -426,12 +436,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 		public bool IsCorrectObject()
 		{
-			if (this.hsrGraspingDetector.GetGraspedObject() != null)
-			{
-				return this.graspingTarget == this.hsrGraspingDetector.GetGraspedObject();
-			}
-
-			return false;
+			return IsObjectGraspedSucceeded();
 		}
 
 
