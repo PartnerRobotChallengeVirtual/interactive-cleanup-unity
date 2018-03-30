@@ -17,8 +17,8 @@ namespace SIGVerse.Competition.InteractiveCleanup
 	{
 		Initialize,
 		WaitForStart,
-		WaitForIamReady, 
 		TaskStart,
+		WaitForIamReady, 
 		SendingPickItUpMsg,
 		SendingCleanUpMsg,
 		WaitForObjectGrasped,
@@ -187,33 +187,19 @@ namespace SIGVerse.Competition.InteractiveCleanup
 				{
 					case ModeratorStep.Initialize:
 					{
-						SIGVerseLogger.Info("Initialize");
-						this.PreProcess();
-						this.step++;
+						if (this.stepTimer.IsTimePassed((int)this.step, 3000))
+						{
+							SIGVerseLogger.Info("Initialize");
+							this.PreProcess();
+							this.step++;
+						}
 						break;
 					}
 					case ModeratorStep.WaitForStart:
 					{
-						if (this.stepTimer.IsTimePassed((int)this.step, 3000))
-						{
-							if(!this.tool.IsPlaybackInitialized()) { break; }
-
-							this.step++;
-						}
-
-						break;
-					}
-					case ModeratorStep.WaitForIamReady:
-					{
-						if (this.receivedMessageMap[MsgIamReady])
+						if(this.tool.IsPlaybackInitialized() && this.tool.IsConnectedToRos())
 						{
 							this.step++;
-							break;
-						}
-
-						if (this.stepTimer.IsTimePassed((int)this.step, SendingAreYouReadyInterval))
-						{
-							this.SendRosMessage(MsgAreYouReady, "");
 						}
 
 						break;
@@ -233,6 +219,21 @@ namespace SIGVerse.Competition.InteractiveCleanup
 						this.tool.StartPlayback();
 
 						this.step++;
+
+						break;
+					}
+					case ModeratorStep.WaitForIamReady:
+					{
+						if (this.receivedMessageMap[MsgIamReady])
+						{
+							this.step++;
+							break;
+						}
+
+						if (this.stepTimer.IsTimePassed((int)this.step, SendingAreYouReadyInterval))
+						{
+							this.SendRosMessage(MsgAreYouReady, "");
+						}
 
 						break;
 					}
@@ -449,7 +450,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		}
 
 
-		public void OnReceiveRosMessage(ROSBridge.interactive_cleanup.InteractiveCleanupMsg interactiveCleanupMsg)
+		public void OnReceiveRosMessage(RosBridge.interactive_cleanup.InteractiveCleanupMsg interactiveCleanupMsg)
 		{
 			if(this.receivedMessageMap.ContainsKey(interactiveCleanupMsg.message))
 			{

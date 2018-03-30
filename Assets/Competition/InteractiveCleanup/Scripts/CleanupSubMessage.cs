@@ -1,17 +1,21 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using SIGVerse.Common;
+using SIGVerse.RosBridge;
+using System.Collections.Generic;
 
 namespace SIGVerse.Competition.InteractiveCleanup
 {
 	public interface IRosMsgReceiveHandler : IEventSystemHandler
 	{
-		void OnReceiveRosMessage(ROSBridge.interactive_cleanup.InteractiveCleanupMsg interactiveCleanupMsg);
+		void OnReceiveRosMessage(RosBridge.interactive_cleanup.InteractiveCleanupMsg interactiveCleanupMsg);
 	}
 
-	public class CleanupSubMessage : RosSubMessage<ROSBridge.interactive_cleanup.InteractiveCleanupMsg>
+	public class CleanupSubMessage : RosSubMessage<RosBridge.interactive_cleanup.InteractiveCleanupMsg>
 	{
-		override public void SubscribeMessageCallback(ROSBridge.interactive_cleanup.InteractiveCleanupMsg cleanupMsg)
+		public List<GameObject> destinations;
+
+		protected override void SubscribeMessageCallback(RosBridge.interactive_cleanup.InteractiveCleanupMsg cleanupMsg)
 		{
 			SIGVerseLogger.Info("Received message :"+cleanupMsg.message);
 

@@ -4,17 +4,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using SIGVerse.ROSBridge;
+using SIGVerse.RosBridge;
 using UnityEngine;
 
 
-namespace SIGVerse.ROSBridge
+namespace SIGVerse.RosBridge
 {
 	namespace interactive_cleanup
 	{
 
 		[System.Serializable]
-		public class InteractiveCleanupMsg : ROSMessage
+		public class InteractiveCleanupMsg : RosMessage
 		{
 			public string message;
 			public string detail;

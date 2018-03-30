@@ -8,6 +8,7 @@ using UnityEngine;
 using SIGVerse.Common;
 using System.Collections;
 using SIGVerse.ToyotaHSR;
+using SIGVerse.RosBridge;
 
 namespace SIGVerse.Competition.InteractiveCleanup
 {
@@ -41,6 +42,8 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		private const string TagDestinationCandidates      = "DestinationCandidates";
 
 		private const string JudgeTriggersName = "JudgeTriggers";
+
+		private IRosConnection[] rosConnections;
 
 		private string environmentName;
 		private GameObject graspingTarget;
@@ -309,6 +312,10 @@ namespace SIGVerse.Competition.InteractiveCleanup
 //				Debug.Log(pair.Key.name + " : " + pair.Value.name);
 			}
 
+			this.rosConnections = SIGVerseUtils.FindObjectsOfInterface<IRosConnection>();
+
+			SIGVerseLogger.Info("ROS connection : count=" + this.rosConnections.Length);
+
 			this.hasPressedButtonForDataGeneration = false;
 			this.hasPointedTarget       = false;
 			this.hasPointedDestination  = false;
@@ -487,6 +494,18 @@ namespace SIGVerse.Competition.InteractiveCleanup
 					throw new Exception("Illegal Execution mode. mode=" + CleanupConfig.Instance.configFileInfo.executionMode);
 				}
 			}
+		}
+
+		public bool IsConnectedToRos()
+		{
+			foreach(IRosConnection rosConnection in this.rosConnections)
+			{
+				if(!rosConnection.IsConnected())
+				{
+					return false;
+				}
+			}
+			return true;
 		}
 
 		public bool IsPlaybackInitialized()

@@ -29976,7 +29976,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rosBridgeIP: 
   rosBridgePort: 0
-  sendingTopicName: /interactive_cleanup/message/to_robot
+  topicName: /interactive_cleanup/message/to_robot
 --- !u!114 &1642929698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29989,11 +29989,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f7c1dc320fdf0c478de98c4502b4f28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destinations:
-  - {fileID: 1642929695}
   rosBridgeIP: 
   rosBridgePort: 0
-  receivingTopicName: /interactive_cleanup/message/to_moderator
+  topicName: /interactive_cleanup/message/to_moderator
+  destinations:
+  - {fileID: 1642929695}
 --- !u!114 &1642929699
 MonoBehaviour:
   m_ObjectHideFlags: 0

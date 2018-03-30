@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-using SIGVerse.ROSBridge;
+using SIGVerse.RosBridge;
 using SIGVerse.Common;
 
 namespace SIGVerse.Competition.InteractiveCleanup
@@ -10,13 +10,13 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		void OnSendRosMessage(string message, string detail);
 	}
 
-	public class CleanupPubMessage : RosPubMessage<ROSBridge.interactive_cleanup.InteractiveCleanupMsg>, IRosMsgSendHandler
+	public class CleanupPubMessage : RosPubMessage<RosBridge.interactive_cleanup.InteractiveCleanupMsg>, IRosMsgSendHandler
 	{
 		public void OnSendRosMessage(string message, string detail)
 		{
 			SIGVerseLogger.Info("Sending message :" + message + ", " + detail);
 
-			ROSBridge.interactive_cleanup.InteractiveCleanupMsg cleanupMsg = new ROSBridge.interactive_cleanup.InteractiveCleanupMsg();
+			RosBridge.interactive_cleanup.InteractiveCleanupMsg cleanupMsg = new RosBridge.interactive_cleanup.InteractiveCleanupMsg();
 			cleanupMsg.message = message;
 			cleanupMsg.detail = detail;
 
