@@ -187,19 +187,19 @@ namespace SIGVerse.Competition.InteractiveCleanup
 				{
 					case ModeratorStep.Initialize:
 					{
-						if (this.stepTimer.IsTimePassed((int)this.step, 3000))
-						{
-							SIGVerseLogger.Info("Initialize");
-							this.PreProcess();
-							this.step++;
-						}
+						SIGVerseLogger.Info("Initialize");
+						this.PreProcess();
+						this.step++;
 						break;
 					}
 					case ModeratorStep.WaitForStart:
 					{
-						if(this.tool.IsPlaybackInitialized() && this.tool.IsConnectedToRos())
+						if (this.stepTimer.IsTimePassed((int)this.step, 3000))
 						{
-							this.step++;
+							if(this.tool.IsPlaybackInitialized() && this.tool.IsConnectedToRos())
+							{
+								this.step++;
+							}
 						}
 
 						break;
