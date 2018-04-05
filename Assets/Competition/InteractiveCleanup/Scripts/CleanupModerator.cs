@@ -139,7 +139,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 			SIGVerseLogger.Info("##### " + this.mainPanelController.GetTrialNumberText() + " #####");
 
-			this.mainPanelController.ResetTimeLeftText();
+			this.scoreManager.ResetTimeLeftText();
 
 
 			this.receivedMessageMap = new Dictionary<string, bool>();
