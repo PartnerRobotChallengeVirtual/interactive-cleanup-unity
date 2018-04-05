@@ -508,6 +508,26 @@ namespace SIGVerse.Competition.InteractiveCleanup
 			return true;
 		}
 
+		public void ClearRosConnections()
+		{
+			foreach(IRosConnection rosConnection in this.rosConnections)
+			{
+				rosConnection.Clear();
+			}
+
+			SIGVerseLogger.Info("Clear ROS connections");
+		}
+
+		public void CloseRosConnections()
+		{
+			foreach(IRosConnection rosConnection in this.rosConnections)
+			{
+				rosConnection.Close();
+			}
+
+			SIGVerseLogger.Info("Close ROS connections");
+		}
+
 		public bool IsPlaybackInitialized()
 		{
 			if(CleanupConfig.Instance.configFileInfo.playbackType == WorldPlaybackCommon.PlaybackTypeRecord)

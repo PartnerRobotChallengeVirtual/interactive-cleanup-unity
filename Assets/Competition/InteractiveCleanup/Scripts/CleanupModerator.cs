@@ -163,7 +163,16 @@ namespace SIGVerse.Competition.InteractiveCleanup
 				this.SendRosMessage(MsgMissionComplete, "");
 
 				SIGVerseLogger.Info("All tasks finished.");
+
+				this.tool.CloseRosConnections();
+
 				this.isAllTaskFinished = true;
+			}
+			else
+			{
+				this.tool.ClearRosConnections();
+
+				this.step = ModeratorStep.WaitForNextTask;
 			}
 		}
 
@@ -412,8 +421,6 @@ namespace SIGVerse.Competition.InteractiveCleanup
 			this.SendRosMessage(message, detail);
 
 			this.PostProcess();
-
-			this.step = ModeratorStep.WaitForNextTask;
 		}
 
 
