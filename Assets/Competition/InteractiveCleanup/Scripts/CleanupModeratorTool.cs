@@ -566,7 +566,10 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 				if(!isStarted) { SIGVerseLogger.Warn("Cannot start the world playback recording"); }
 			}
+		}
 
+		public void StartAvatarMotionPlayback()
+		{
 			switch (this.executionMode)
 			{
 				// For the competition. Read generated data.

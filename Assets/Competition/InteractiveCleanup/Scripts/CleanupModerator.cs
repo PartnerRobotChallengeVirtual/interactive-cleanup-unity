@@ -235,6 +235,8 @@ namespace SIGVerse.Competition.InteractiveCleanup
 					{
 						if (this.receivedMessageMap[MsgIamReady])
 						{
+							this.tool.StartAvatarMotionPlayback();
+
 							this.step++;
 							break;
 						}
