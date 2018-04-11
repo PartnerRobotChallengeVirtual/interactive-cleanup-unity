@@ -40,13 +40,14 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		private const string MsgTaskFailed      = "Task_failed";
 		private const string MsgMissionComplete = "Mission_complete";
 
-		private const string ReasonTimeIsUp = "Time_is_up";
-		private const string ReasonGiveUp   = "Give_up";
-
 		private const string MsgIamReady      = "I_am_ready";
 		private const string MsgIsThisCorrect = "Is_this_correct?";
 		private const string MsgObjectGrasped = "Object_grasped";
 		private const string MsgTaskFinished  = "Task_finished";
+		private const string MsgGiveUp        = "Give_up";
+
+		private const string ReasonTimeIsUp = "Time_is_up";
+		private const string ReasonGiveUp   = MsgGiveUp;
 
 		//-----------------------------
 
@@ -147,6 +148,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 			this.receivedMessageMap.Add(MsgIsThisCorrect, false);
 			this.receivedMessageMap.Add(MsgObjectGrasped, false);
 			this.receivedMessageMap.Add(MsgTaskFinished,  false);
+			this.receivedMessageMap.Add(MsgGiveUp,        false);
 
 			this.tool.InitializePlayback();
 
@@ -482,6 +484,11 @@ namespace SIGVerse.Competition.InteractiveCleanup
 				if(interactiveCleanupMsg.message==MsgTaskFinished)
 				{
 					if(this.step!=ModeratorStep.WaitForTaskFinished) { SIGVerseLogger.Warn("Illegal timing. message : " + interactiveCleanupMsg.message); return; }
+				}
+
+				if(interactiveCleanupMsg.message==MsgGiveUp)
+				{
+					this.OnGiveUp();
 				}
 
 				this.receivedMessageMap[interactiveCleanupMsg.message] = true;
