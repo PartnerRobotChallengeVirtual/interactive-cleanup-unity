@@ -16,7 +16,9 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		public enum Type
 		{
 			ObjectGraspedSuccess,
+			ObjectGraspedFailure,
 			CleanupSuccess,
+			CleanupFailure,
 			AskedCorrectOrNot,
 			HsrCollisionEnter,
 			ObjectCollisionEnter,
@@ -27,7 +29,9 @@ namespace SIGVerse.Competition.InteractiveCleanup
 			switch(scoreType)
 			{
 				case Score.Type.ObjectGraspedSuccess: { return +50; }
+				case Score.Type.ObjectGraspedFailure: { return -10; }
 				case Score.Type.CleanupSuccess      : { return +50; }
+				case Score.Type.CleanupFailure      : { return -10; }
 				case Score.Type.AskedCorrectOrNot   : { return -10; }
 				case Score.Type.HsrCollisionEnter   : { return GetHsrCollisionScore   ((Collision)args[0], (float)args[1]); }
 				case Score.Type.ObjectCollisionEnter: { return GetObjectCollisionScore((Collision)args[0], (float)args[1]); }

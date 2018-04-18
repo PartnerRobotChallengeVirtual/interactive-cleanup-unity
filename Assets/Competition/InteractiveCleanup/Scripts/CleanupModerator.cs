@@ -322,6 +322,8 @@ namespace SIGVerse.Competition.InteractiveCleanup
 							{
 								SIGVerseLogger.Info("Failed '" + MsgObjectGrasped + "'");
 								this.SendPanelNotice("Failed\n" + MsgObjectGrasped.Replace('_', ' '), 100, PanelNoticeStatus.Red);
+								this.scoreManager.AddScore(Score.Type.ObjectGraspedFailure);
+
 								this.GoToNextTaskTaskFailed("Failed " + MsgObjectGrasped);
 
 								return;
@@ -371,6 +373,8 @@ namespace SIGVerse.Competition.InteractiveCleanup
 							{
 								SIGVerseLogger.Info("Failed '" + MsgTaskFinished + "'");
 								this.SendPanelNotice("Failed", 150, PanelNoticeStatus.Red);
+								this.scoreManager.AddScore(Score.Type.CleanupFailure);
+
 								this.GoToNextTaskTaskFailed("Failed " + MsgTaskFinished);
 							}
 						}
