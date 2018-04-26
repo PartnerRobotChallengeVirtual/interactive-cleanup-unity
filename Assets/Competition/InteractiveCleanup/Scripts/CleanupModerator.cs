@@ -8,7 +8,6 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using SIGVerse.Common;
 using SIGVerse.Competition;
-using SIGVerse.ToyotaHSR;
 using UnityEngine.UI;
 
 namespace SIGVerse.Competition.InteractiveCleanup
@@ -235,7 +234,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 					}
 					case ModeratorStep.WaitForIamReady:
 					{
-						if (this.receivedMessageMap[MsgIamReady])
+						if (this.executionMode == ExecutionMode.DataGeneration || this.receivedMessageMap[MsgIamReady])
 						{
 							this.tool.StartAvatarMotionPlayback();
 

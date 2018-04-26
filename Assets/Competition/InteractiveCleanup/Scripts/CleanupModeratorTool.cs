@@ -37,7 +37,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 		private const string TagRobot                      = "Robot";
 		private const string TagGraspingCandidates         = "GraspingCandidates";
-		private const string TagDummyGraspingCandidates    = "DummyGraspingCandidates";
+//		private const string TagDummyGraspingCandidates    = "DummyGraspingCandidates";
 		private const string TagGraspingCandidatesPosition = "GraspingCandidatesPosition";
 		private const string TagDestinationCandidates      = "DestinationCandidates";
 
@@ -162,12 +162,12 @@ namespace SIGVerse.Competition.InteractiveCleanup
 				throw new Exception("Count of GraspingCandidates is zero.");
 			}
 
-			List<GameObject> dummyGraspingCandidates = GameObject.FindGameObjectsWithTag(TagDummyGraspingCandidates).ToList<GameObject>();
+//			List<GameObject> dummyGraspingCandidates = GameObject.FindGameObjectsWithTag(TagDummyGraspingCandidates).ToList<GameObject>();
 
 			this.graspables = new List<GameObject>();
 
 			this.graspables.AddRange(graspingCandidates);
-			this.graspables.AddRange(dummyGraspingCandidates);
+//			this.graspables.AddRange(dummyGraspingCandidates);
 
 			// Check the name conflict of graspables.
 			if(this.graspables.Count != (from graspable in this.graspables select graspable.name).Distinct().Count())
@@ -745,6 +745,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 					this.hasPressedButtonForDataGeneration = true;
 					break;
 				}
+				case ModeratorStep.WaitForObjectGrasped:
 				case ModeratorStep.WaitForTaskFinished:
 				case ModeratorStep.Judgement:
 				case ModeratorStep.WaitForNextTask:

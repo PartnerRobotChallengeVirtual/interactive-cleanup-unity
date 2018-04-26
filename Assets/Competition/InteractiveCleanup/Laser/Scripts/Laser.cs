@@ -33,7 +33,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 			this.graspingCandidates = new List<GameObject>();
 			this.graspingCandidates.AddRange(GameObject.FindGameObjectsWithTag("GraspingCandidates"));
-			this.graspingCandidates.AddRange(GameObject.FindGameObjectsWithTag("DummyGraspingCandidates"));
+//			this.graspingCandidates.AddRange(GameObject.FindGameObjectsWithTag("DummyGraspingCandidates"));
 
 			this.destinationCandidates = new List<GameObject>();
 			this.destinationCandidates.AddRange(GameObject.FindGameObjectsWithTag("DestinationCandidates"));

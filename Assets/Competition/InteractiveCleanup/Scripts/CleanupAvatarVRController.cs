@@ -1,6 +1,9 @@
+using SIGVerse.Human.IK;
+using SIGVerse.Human.VR;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -25,8 +28,26 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 		public List<GameObject> avatarMotionDestinations;
 
+		//----------------------------------------
+
+		private CapsuleCollider       rootCapsuleCollider;
+		private List<CapsuleCollider> capsuleColliders;
+
+		SimpleHumanVRController simpleHumanVRController;
+		SimpleIK simpleIK;
+		List<CleanupAvatarVRHandController> cleanupAvatarVRHandControllers;
+
+
 		void Awake()
 		{
+			this.rootCapsuleCollider   = this.GetComponent<CapsuleCollider>();
+			this.capsuleColliders      = this.GetComponentsInChildren<CapsuleCollider>().ToList();
+			this.capsuleColliders.Remove(this.rootCapsuleCollider);
+
+			this.simpleHumanVRController        = this.GetComponentInChildren<SimpleHumanVRController>();
+			this.simpleIK                       = this.GetComponentInChildren<SimpleIK>();
+			this.cleanupAvatarVRHandControllers = this.GetComponentsInChildren<CleanupAvatarVRHandController>().ToList();
+
 			ExecutionMode executionMode = (ExecutionMode)Enum.ToObject(typeof(ExecutionMode), CleanupConfig.Instance.configFileInfo.executionMode);
 
 			switch (executionMode)
@@ -44,6 +65,13 @@ namespace SIGVerse.Competition.InteractiveCleanup
 						cleanupAvatarVRHandController.enabled = false;
 					}
 
+					this.rootCapsuleCollider.enabled = false;
+					foreach(CapsuleCollider capsuleCollider in this.capsuleColliders){ capsuleCollider.enabled = true; }
+
+					this.simpleHumanVRController.enabled = false;
+					this.simpleIK               .enabled = false;
+					foreach(CleanupAvatarVRHandController cleanupAvatarVRHandController in this.cleanupAvatarVRHandControllers){ cleanupAvatarVRHandController.enabled = false; }
+
 					this.enabled = false;
 
 					break;
@@ -53,6 +81,13 @@ namespace SIGVerse.Competition.InteractiveCleanup
 				{
 					this.ovrCameraRig.SetActive(true);
 					this.avatarAnimator.enabled = true;
+
+					this.rootCapsuleCollider.enabled = true;
+					foreach(CapsuleCollider capsuleCollider in this.capsuleColliders){ capsuleCollider.enabled = false; }
+
+					this.simpleHumanVRController.enabled = true;
+					this.simpleIK               .enabled = true;
+					foreach(CleanupAvatarVRHandController cleanupAvatarVRHandController in this.cleanupAvatarVRHandControllers){ cleanupAvatarVRHandController.enabled = true; }
 
 					break;
 				}
