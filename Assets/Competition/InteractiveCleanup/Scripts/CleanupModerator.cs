@@ -165,13 +165,13 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 				SIGVerseLogger.Info("All tasks finished.");
 
-				this.tool.CloseRosConnections();
+				StartCoroutine(this.tool.CloseRosConnections());
 
 				this.isAllTaskFinished = true;
 			}
 			else
 			{
-				this.tool.ClearRosConnections();
+				StartCoroutine(this.tool.ClearRosConnections());
 
 				this.step = ModeratorStep.WaitForNextTask;
 			}

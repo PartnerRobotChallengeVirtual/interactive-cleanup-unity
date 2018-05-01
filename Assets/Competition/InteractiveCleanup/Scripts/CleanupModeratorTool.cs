@@ -508,8 +508,10 @@ namespace SIGVerse.Competition.InteractiveCleanup
 			return true;
 		}
 
-		public void ClearRosConnections()
+		public IEnumerator ClearRosConnections()
 		{
+			yield return new WaitForSecondsRealtime (1.5f);
+
 			foreach(IRosConnection rosConnection in this.rosConnections)
 			{
 				rosConnection.Clear();
@@ -518,8 +520,10 @@ namespace SIGVerse.Competition.InteractiveCleanup
 			SIGVerseLogger.Info("Clear ROS connections");
 		}
 
-		public void CloseRosConnections()
+		public IEnumerator CloseRosConnections()
 		{
+			yield return new WaitForSecondsRealtime (1.5f);
+
 			foreach(IRosConnection rosConnection in this.rosConnections)
 			{
 				rosConnection.Close();
