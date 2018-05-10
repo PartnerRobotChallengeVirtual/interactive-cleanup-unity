@@ -4,8 +4,8 @@
 - Unity scene used in the event  
 Assets/Competition/InteractiveCleanup/InteractiveCleanup201805.unity
 - Unity scene for confirming layouts in advance  
-Assets/Competition/InteractiveCleanup/InteractiveCleanup201805Layout.unity
-
+Assets/Competition/InteractiveCleanup/InteractiveCleanup201805Layout.unity  
+(There are config files at SIGVerseConfig/InteractiveCleanup/sample/forLayout)
 ---
 # Interactive Cleanup Project
 
