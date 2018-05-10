@@ -1,3 +1,12 @@
+### This branch has resources of an event held in May 2018 to verify the contents of WRS2018.
+
+
+- Unity scene used in the event  
+Assets/Competition/InteractiveCleanup/InteractiveCleanup201805.unity
+- Unity scene for confirming layouts in advance  
+Assets/Competition/InteractiveCleanup/InteractiveCleanup201805Layout.unity
+
+---
 # Interactive Cleanup Project
 
 This is a Unity project for the Interactive Cleanup task of the Partner Robot Challenge (Virtual Space) in the World Robot Competition.
