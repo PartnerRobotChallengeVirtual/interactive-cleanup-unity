@@ -1,12 +1,3 @@
-### This branch has resources of an event held in May 2018 to verify the contents of WRS2018.
-
-
-- Unity scene used in the event  
-Assets/Competition/InteractiveCleanup/InteractiveCleanup201805.unity
-- Unity scene for confirming layouts in advance  
-Assets/Competition/InteractiveCleanup/InteractiveCleanup201805Layout.unity  
-(There are config files at SIGVerseConfig/InteractiveCleanup/sample/forLayout)
----
 # Interactive Cleanup Project
 
 This is a Unity project for the Interactive Cleanup task of the Partner Robot Challenge (Virtual Space) in the World Robot Competition.
@@ -34,7 +25,7 @@ See also [wiki page](https://github.com/PartnerRobotChallengeVirtual/interactive
 
 ### Import the Oculus Utilities for Unity
 
-1. Download Oculus Utilities for Unity ver.1.24.0 from the following link.  
+1. Download Oculus Utilities for Unity ver.1.24.0 from the following link. ?
 https://developer.oculus.com/downloads/package/oculus-utilities-for-unity-5/1.24.0/
 2. Unzip the downloaded file.
 3. Open this project with Unity.
