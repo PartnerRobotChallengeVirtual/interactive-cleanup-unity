@@ -11,6 +11,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 	[System.Serializable]
 	public class CleanupConfigFileInfo
 	{
+		public int  sessionTimeLimit;
 		public int  maxNumberOfTrials;
 		public bool isScoreFileRead;
 		public int  executionMode;
@@ -26,7 +27,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 	public class CleanupConfig : Singleton<CleanupConfig>
 	{
-		public const string FolderPath = "/../SIGVerseConfig/InteractiveCleanup/";
+		public const string FolderPath     = "/../SIGVerseConfig/InteractiveCleanup/";
 
 		public const string ConfigFileName = "InteractiveCleanupConfig.json";
 		public const string ScoreFileName  = "InteractiveCleanupScore.txt";
@@ -63,11 +64,12 @@ namespace SIGVerse.Competition.InteractiveCleanup
 			{
 				SIGVerseLogger.Warn("Cleanup config file does not exists.");
 
+				this.configFileInfo.sessionTimeLimit  = 360;
 				this.configFileInfo.maxNumberOfTrials = 15;
-				this.configFileInfo.isScoreFileRead = false;
-				this.configFileInfo.executionMode = (int)ExecutionMode.Competition;
-				this.configFileInfo.isAlwaysGoNext = false;
-				this.configFileInfo.playbackType = CleanupPlaybackCommon.PlaybackTypeRecord;
+				this.configFileInfo.isScoreFileRead   = false;
+				this.configFileInfo.executionMode     = (int)ExecutionMode.Competition;
+				this.configFileInfo.isAlwaysGoNext    = false;
+				this.configFileInfo.playbackType      = CleanupPlaybackCommon.PlaybackTypeRecord;
 
 				this.SaveConfig();
 			}

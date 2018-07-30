@@ -35,7 +35,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 					graspingCandidatePosition.SetActive(false);
 				}
 
-				this.timeLimit = this.scoreManager.timeLimit;
+				this.timeLimit = CleanupConfig.Instance.configFileInfo.sessionTimeLimit;
 			}
 		}
 
