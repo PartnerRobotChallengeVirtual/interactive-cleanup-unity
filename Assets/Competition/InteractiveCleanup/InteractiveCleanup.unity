@@ -1286,7 +1286,7 @@ GameObject:
   - component: {fileID: 1303719972}
   - component: {fileID: 88334729}
   m_Layer: 0
-  m_Name: soysauce_full
+  m_Name: soysauce
   m_TagString: GraspingCandidates
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1423,7 +1423,7 @@ GameObject:
   - component: {fileID: 115298581}
   - component: {fileID: 115298580}
   m_Layer: 0
-  m_Name: tumiki_car
+  m_Name: block_car
   m_TagString: GraspingCandidates
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2964,7 +2964,7 @@ GameObject:
   - component: {fileID: 188015036}
   - component: {fileID: 188015035}
   m_Layer: 0
-  m_Name: doll_bear
+  m_Name: bear_doll
   m_TagString: GraspingCandidates
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5576,7 +5576,7 @@ GameObject:
   - component: {fileID: 302651292}
   - component: {fileID: 302651291}
   m_Layer: 0
-  m_Name: wagon_c02_2
+  m_Name: wagon#2
   m_TagString: DestinationCandidates
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6846,7 +6846,7 @@ GameObject:
   - component: {fileID: 357539245}
   - component: {fileID: 357539244}
   m_Layer: 0
-  m_Name: cup_c02
+  m_Name: pink_cup
   m_TagString: GraspingCandidates
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7093,7 +7093,7 @@ GameObject:
   - component: {fileID: 387052159}
   - component: {fileID: 387052158}
   m_Layer: 0
-  m_Name: sidetable_A_1
+  m_Name: white_table#1
   m_TagString: DestinationCandidates
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8930,7 +8930,7 @@ GameObject:
   - component: {fileID: 566576714}
   - component: {fileID: 566576717}
   m_Layer: 0
-  m_Name: nursingbottle
+  m_Name: nursing_bottle
   m_TagString: GraspingCandidates
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10213,7 +10213,7 @@ GameObject:
   - component: {fileID: 1428478166}
   - component: {fileID: 642156993}
   m_Layer: 0
-  m_Name: doll_dog
+  m_Name: dog_doll
   m_TagString: GraspingCandidates
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11535,7 +11535,7 @@ GameObject:
   - component: {fileID: 1549356485}
   - component: {fileID: 757047369}
   m_Layer: 0
-  m_Name: sauce_full
+  m_Name: sauce
   m_TagString: GraspingCandidates
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12624,7 +12624,7 @@ GameObject:
   - component: {fileID: 2120260028}
   - component: {fileID: 834468838}
   m_Layer: 0
-  m_Name: doll_rabbit
+  m_Name: rabbit_doll
   m_TagString: GraspingCandidates
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15055,7 +15055,7 @@ GameObject:
   - component: {fileID: 317463766}
   - component: {fileID: 974103698}
   m_Layer: 0
-  m_Name: wide_trashbox_c03
+  m_Name: trash_box_for_bottle_can
   m_TagString: DestinationCandidates
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16122,7 +16122,7 @@ GameObject:
   - component: {fileID: 1030460401}
   - component: {fileID: 1030460400}
   m_Layer: 0
-  m_Name: lowtable_A
+  m_Name: low_table
   m_TagString: DestinationCandidates
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16517,7 +16517,7 @@ GameObject:
   - component: {fileID: 1063870165}
   - component: {fileID: 1063870168}
   m_Layer: 0
-  m_Name: mayonaise_empty
+  m_Name: empty_mayonnaise
   m_TagString: GraspingCandidates
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17584,7 +17584,7 @@ GameObject:
   - component: {fileID: 1105589351}
   - component: {fileID: 1105589350}
   m_Layer: 0
-  m_Name: ketchup_full
+  m_Name: ketchup
   m_TagString: GraspingCandidates
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18707,7 +18707,7 @@ GameObject:
   - component: {fileID: 1148727102}
   - component: {fileID: 1148727101}
   m_Layer: 0
-  m_Name: cannedjuice
+  m_Name: canned_juice
   m_TagString: GraspingCandidates
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18802,7 +18802,7 @@ GameObject:
   - component: {fileID: 1152121945}
   - component: {fileID: 1152121944}
   m_Layer: 0
-  m_Name: sidetable_A_2
+  m_Name: white_table#2
   m_TagString: DestinationCandidates
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21552,7 +21552,7 @@ GameObject:
   - component: {fileID: 2127669833}
   - component: {fileID: 1336022637}
   m_Layer: 0
-  m_Name: wide_trashbox_c02
+  m_Name: trash_box_for_burnable
   m_TagString: DestinationCandidates
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25408,7 +25408,7 @@ GameObject:
   - component: {fileID: 1645522127}
   - component: {fileID: 1645522126}
   m_Layer: 0
-  m_Name: pepper_full
+  m_Name: pepper
   m_TagString: GraspingCandidates
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27899,7 +27899,7 @@ GameObject:
   - component: {fileID: 625880369}
   - component: {fileID: 1786382508}
   m_Layer: 0
-  m_Name: wide_trashbox_c01
+  m_Name: trash_box_for_recycle
   m_TagString: DestinationCandidates
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28898,7 +28898,7 @@ GameObject:
   - component: {fileID: 1846021865}
   - component: {fileID: 1846021864}
   m_Layer: 0
-  m_Name: wagon_c02_1
+  m_Name: wagon#1
   m_TagString: DestinationCandidates
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29365,7 +29365,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a540f2c6b4086542872c82503f90958, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLimit: 360
   scoreNotificationDestinations:
   - {fileID: 68156980}
   timeIsUpDestinationTags:
@@ -31410,7 +31409,7 @@ GameObject:
   - component: {fileID: 1951139489}
   - component: {fileID: 1951139488}
   m_Layer: 0
-  m_Name: tumblerglass
+  m_Name: tumbler
   m_TagString: GraspingCandidates
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32129,6 +32128,14 @@ Prefab:
     - target: {fileID: 4565211342487820, guid: 52e4f49510f5e83429982d5221396009, type: 2}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1477729721673764, guid: 52e4f49510f5e83429982d5221396009, type: 2}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 1201055073696812, guid: 52e4f49510f5e83429982d5221396009, type: 2}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 52e4f49510f5e83429982d5221396009, type: 2}

@@ -1,11 +1,11 @@
 {
-    "taskMessage": "Target=cannedjuice,  Destination=sidetable_A_1",
+    "taskMessage": "Target=canned_juice,  Destination=white_table#1",
     "environmentName": "Environment_01",
-    "graspingTargetName": "cannedjuice",
-    "destinationName": "sidetable_A_1",
+    "graspingTargetName": "canned_juice",
+    "destinationName": "white_table#1",
     "graspablesPositions": [
         {
-            "name": "tumblerglass",
+            "name": "tumbler",
             "position": {
                 "x": -2.7339999675750734,
                 "y": 0.0010000020265579224,
@@ -31,7 +31,7 @@
             }
         },
         {
-            "name": "doll_dog",
+            "name": "dog_doll",
             "position": {
                 "x": -0.37299999594688418,
                 "y": 0.4960000216960907,
@@ -44,7 +44,7 @@
             }
         },
         {
-            "name": "soysauce_full",
+            "name": "soysauce",
             "position": {
                 "x": -5.839000225067139,
                 "y": 0.4440000057220459,
@@ -83,7 +83,7 @@
             }
         },
         {
-            "name": "cup_c02",
+            "name": "pink_cup",
             "position": {
                 "x": -4.635000228881836,
                 "y": 0.0010000020265579224,
@@ -96,7 +96,7 @@
             }
         },
         {
-            "name": "cannedjuice",
+            "name": "canned_juice",
             "position": {
                 "x": -0.3400000035762787,
                 "y": 0.0010000020265579224,
@@ -109,7 +109,7 @@
             }
         },
         {
-            "name": "tumiki_car",
+            "name": "block_car",
             "position": {
                 "x": -6.079999923706055,
                 "y": 0.7259999513626099,
@@ -122,7 +122,7 @@
             }
         },
         {
-            "name": "ketchup_full",
+            "name": "ketchup",
             "position": {
                 "x": -1.059999942779541,
                 "y": 0.0010000020265579224,
@@ -135,7 +135,7 @@
             }
         },
         {
-            "name": "doll_rabbit",
+            "name": "rabbit_doll",
             "position": {
                 "x": -2.859999895095825,
                 "y": 0.0010000020265579224,
@@ -148,7 +148,7 @@
             }
         },
         {
-            "name": "mayonaise_empty",
+            "name": "empty_mayonnaise",
             "position": {
                 "x": -5.480000019073486,
                 "y": 0.7259999513626099,
@@ -161,7 +161,7 @@
             }
         },
         {
-            "name": "nursingbottle",
+            "name": "nursing_bottle",
             "position": {
                 "x": -4.533999919891357,
                 "y": 0.6229999661445618,
@@ -174,7 +174,7 @@
             }
         },
         {
-            "name": "sauce_full",
+            "name": "sauce",
             "position": {
                 "x": -2.819999933242798,
                 "y": 0.0010000020265579224,
@@ -187,7 +187,7 @@
             }
         },
         {
-            "name": "pepper_full",
+            "name": "pepper",
             "position": {
                 "x": -0.75,
                 "y": 0.0010000020265579224,
@@ -200,7 +200,7 @@
             }
         },
         {
-            "name": "doll_bear",
+            "name": "bear_doll",
             "position": {
                 "x": -5.072999954223633,
                 "y": 0.4440000057220459,
@@ -215,7 +215,7 @@
     ],
     "destinationsPositions": [
         {
-            "name": "wagon_c02_2",
+            "name": "wagon#2",
             "position": {
                 "x": -6.25,
                 "y": 0.0,
@@ -228,7 +228,7 @@
             }
         },
         {
-            "name": "sidetable_A_1",
+            "name": "white_table#1",
             "position": {
                 "x": -0.11999999731779099,
                 "y": 0.0,
@@ -241,7 +241,7 @@
             }
         },
         {
-            "name": "wide_trashbox_c03",
+            "name": "trash_box_for_bottle_can",
             "position": {
                 "x": -0.1899999976158142,
                 "y": 0.0,
@@ -254,7 +254,7 @@
             }
         },
         {
-            "name": "lowtable_A",
+            "name": "low_table",
             "position": {
                 "x": -5.52400016784668,
                 "y": 0.0,
@@ -267,7 +267,7 @@
             }
         },
         {
-            "name": "sidetable_A_2",
+            "name": "white_table#2",
             "position": {
                 "x": -0.8100000023841858,
                 "y": 0.0,
@@ -280,7 +280,7 @@
             }
         },
         {
-            "name": "wide_trashbox_c02",
+            "name": "trash_box_for_burnable",
             "position": {
                 "x": -1.9299999475479127,
                 "y": 0.0,
@@ -293,7 +293,7 @@
             }
         },
         {
-            "name": "wide_trashbox_c01",
+            "name": "trash_box_for_recycle",
             "position": {
                 "x": -3.619999885559082,
                 "y": 0.0,
@@ -306,7 +306,7 @@
             }
         },
         {
-            "name": "wagon_c02_1",
+            "name": "wagon#1",
             "position": {
                 "x": -5.326000213623047,
                 "y": 0.0,
