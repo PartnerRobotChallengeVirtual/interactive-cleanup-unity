@@ -89,6 +89,12 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		{
 			return this.step == Step.Waiting;
 		}
+
+
+		public void ApplyFirstPostureOfAvatar()
+		{
+			base.transformController.ExecuteFirstEvent();
+		}
 	}
 }
 

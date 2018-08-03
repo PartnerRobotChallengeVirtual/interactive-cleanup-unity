@@ -208,6 +208,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 						{
 							if(this.tool.IsPlaybackInitialized() && this.tool.IsConnectedToRos())
 							{
+								this.tool.ApplyFirstPostureOfAvatar();
 								this.step++;
 							}
 						}

@@ -562,6 +562,11 @@ namespace SIGVerse.Competition.InteractiveCleanup
 			return true;
 		}
 
+		public void ApplyFirstPostureOfAvatar()
+		{
+			this.avatarMotionPlayer.ApplyFirstPostureOfAvatar();
+		}
+
 		public void StartPlayback()
 		{
 			if(CleanupConfig.Instance.configFileInfo.playbackType == WorldPlaybackCommon.PlaybackTypeRecord)
