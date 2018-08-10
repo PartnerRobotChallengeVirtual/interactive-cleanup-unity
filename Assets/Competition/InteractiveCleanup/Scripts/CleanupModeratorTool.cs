@@ -62,7 +62,9 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 		private ExecutionMode executionMode;
 
-		private bool hasPressedButtonForDataGeneration;
+		private bool hasPressedButtonToStartRecordingAvatarMotion;
+		private bool hasPressedButtonToStopRecordingAvatarMotion;
+
 		private bool hasPointedTarget;
 		private bool hasPointedDestination;
 		private bool? isPlacementSucceeded;
@@ -316,10 +318,12 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 			SIGVerseLogger.Info("ROS connection : count=" + this.rosConnections.Length);
 
-			this.hasPressedButtonForDataGeneration = false;
-			this.hasPointedTarget       = false;
-			this.hasPointedDestination  = false;
+			this.hasPressedButtonToStartRecordingAvatarMotion = false;
+			this.hasPressedButtonToStopRecordingAvatarMotion  = false;
+
 			this.isPlacementSucceeded   = null;
+
+			this.ResetPointingStatus();
 		}
 
 
@@ -405,9 +409,14 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		}
 
 
-		public bool HasPressedButtonForDataGeneration()
+		public bool HasPressedButtonToStartRecordingAvatarMotion()
 		{
-			return this.hasPressedButtonForDataGeneration;
+			return this.hasPressedButtonToStartRecordingAvatarMotion;
+		}
+
+		public bool HasPressedButtonToStopRecordingAvatarMotion()
+		{
+			return this.hasPressedButtonToStopRecordingAvatarMotion;
 		}
 
 		public bool HasPointedTarget()
@@ -418,6 +427,12 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		public bool HasPointedDestination()
 		{
 			return this.hasPointedDestination;
+		}
+
+		public void ResetPointingStatus()
+		{
+			this.hasPointedTarget      = false;
+			this.hasPointedDestination = false;
 		}
 
 		public bool IsObjectGraspedSucceeded()
@@ -564,10 +579,52 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 		public void ApplyFirstPostureOfAvatar()
 		{
-			this.avatarMotionPlayer.ApplyFirstPostureOfAvatar();
+			if (this.executionMode == ExecutionMode.Competition)
+			{
+				this.avatarMotionPlayer.ApplyFirstPostureOfAvatar();
+			}
 		}
 
-		public void StartPlayback()
+		public IEnumerator MakeAvatarInitialPosture()
+		{
+			const float TransitionSpeed = 1.0f;
+
+			List<PlaybackTransformEvent> firstPosture = this.avatarMotionPlayer.GetFirstPostureOfAvatar();
+
+			List<Transform>                   transforms  = new List<Transform>();
+			Dictionary<Transform, Vector3>    startPosMap = new Dictionary<Transform, Vector3>();
+			Dictionary<Transform, Quaternion> startRotMap = new Dictionary<Transform, Quaternion>();
+			Dictionary<Transform, Vector3>    endPosMap   = new Dictionary<Transform, Vector3>();
+			Dictionary<Transform, Quaternion> endRotMap   = new Dictionary<Transform, Quaternion>();
+
+			foreach(PlaybackTransformEvent playbackTransformEvent in firstPosture)
+			{
+				Transform targetTransform = playbackTransformEvent.TargetTransform;
+
+				transforms .Add(targetTransform);
+				startPosMap.Add(targetTransform, playbackTransformEvent.TargetTransform.position);
+				startRotMap.Add(targetTransform, playbackTransformEvent.TargetTransform.rotation);
+				endPosMap  .Add(targetTransform, playbackTransformEvent.Position);
+				endRotMap  .Add(targetTransform, Quaternion.Euler(playbackTransformEvent.Rotation.x, playbackTransformEvent.Rotation.y, playbackTransformEvent.Rotation.z));
+			}
+
+			float ratio = 0;
+
+			while(ratio <= 1.0f)
+			{
+				foreach(Transform targetTransform in transforms)
+				{
+					targetTransform.position = Vector3   .Lerp (startPosMap[targetTransform], endPosMap[targetTransform], ratio);
+					targetTransform.rotation = Quaternion.Slerp(startRotMap[targetTransform], endRotMap[targetTransform], ratio);
+				}
+
+				ratio += Time.deltaTime * TransitionSpeed;
+
+				yield return null;
+			}
+		}
+
+		public void StartPlaybackRecorder()
 		{
 			if(CleanupConfig.Instance.configFileInfo.playbackType == WorldPlaybackCommon.PlaybackTypeRecord)
 			{
@@ -577,35 +634,37 @@ namespace SIGVerse.Competition.InteractiveCleanup
 			}
 		}
 
-		public void StartAvatarMotionPlayback()
+		public void StartAvatarMotionPlaybackPlayer()
 		{
-			switch (this.executionMode)
+			// For the competition. Read generated data.
+			if (this.executionMode == ExecutionMode.Competition)
 			{
-				// For the competition. Read generated data.
-				case ExecutionMode.Competition:
-				{
-					bool isStarted = this.avatarMotionPlayer.Play();
+				bool isStarted = this.avatarMotionPlayer.Play();
 
-					if(!isStarted) { SIGVerseLogger.Warn("Cannot start the avatar motion playing"); }
-					break;
-				}
-				// For data generation. 
-				case ExecutionMode.DataGeneration:
-				{
-					bool isStarted = this.avatarMotionRecorder.Record();
+				if(!isStarted) { SIGVerseLogger.Warn("Cannot start the avatar motion playing"); }
+			}
+		}
 
-					if(!isStarted) { SIGVerseLogger.Warn("Cannot start the avatar motion recording"); }
-					break;
-				}
-				default:
-				{
-					throw new Exception("Illegal Execution mode. mode=" + CleanupConfig.Instance.configFileInfo.executionMode);
-				}
+		public void StartAvatarMotionPlaybackRecorder()
+		{
+			// For data generation. 
+			if (this.executionMode == ExecutionMode.DataGeneration)
+			{
+				bool isStarted = this.avatarMotionRecorder.Record();
+
+				if(!isStarted) { SIGVerseLogger.Warn("Cannot start the avatar motion recording"); }
 			}
 		}
 
 
 		public void StopPlayback()
+		{
+			this.StopPlaybackRecorder();
+			this.StopAvatarMotionPlaybackPlayer();
+			this.StopAvatarMotionPlaybackRecorder();
+		}
+
+		public void StopPlaybackRecorder()
 		{
 			if (CleanupConfig.Instance.configFileInfo.playbackType == WorldPlaybackCommon.PlaybackTypeRecord)
 			{
@@ -613,91 +672,97 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 				if(!isStopped) { SIGVerseLogger.Warn("Cannot stop the world playback recording"); }
 			}
-
-			this.StopAvatarMotionPlayback();
 		}
 
-		private void StopAvatarMotionPlayback()
+		public void StopAvatarMotionPlaybackPlayer()
 		{
-			switch (this.executionMode)
+			// For the competition. Read generated data.
+			if (this.executionMode == ExecutionMode.Competition)
 			{
-				// For the competition. Read generated data.
-				case ExecutionMode.Competition:
-				{
-					bool isStopped = this.avatarMotionPlayer.Stop();
+				bool isStopped = this.avatarMotionPlayer.Stop();
 
-					if(!isStopped) { SIGVerseLogger.Warn("Cannot stop the avatar motion playing"); }
-					break;
-				}
-				// For data generation. 
-				case ExecutionMode.DataGeneration:
-				{
-					bool isStopped = this.avatarMotionRecorder.Stop();
+				if(!isStopped) { SIGVerseLogger.Warn("Cannot stop the avatar motion playing"); }
+			}
+		}
 
-					if(!isStopped) { SIGVerseLogger.Warn("Cannot stop the avatar motion recording"); }
-					break;
-				}
-				default:
-				{
-					throw new Exception("Illegal Execution mode. mode=" + CleanupConfig.Instance.configFileInfo.executionMode);
-				}
+		public void StopAvatarMotionPlaybackRecorder()
+		{
+			// For data generation. 
+			if (this.executionMode == ExecutionMode.DataGeneration)
+			{
+				bool isStopped = this.avatarMotionRecorder.Stop();
+
+				if(!isStopped) { SIGVerseLogger.Warn("Cannot stop the avatar motion recording"); }
 			}
 		}
 
 
 		public bool IsPlaybackFinished()
 		{
+			if(!this.IsPlaybackRecorderFinished()){ return false; }
+
+			if(!this.IsAvatarMotionPlaybackPlayerFinished()){ return false; }
+
+			if(!this.IsAvatarMotionPlaybackRecorderFinished()){ return false; }
+
+			return true;
+		}
+
+		public bool IsPlaybackRecorderFinished()
+		{
 			if(CleanupConfig.Instance.configFileInfo.playbackType == WorldPlaybackCommon.PlaybackTypeRecord)
 			{
-				if(!this.playbackRecorder.IsFinished()) { return false; }
+				return this.playbackRecorder.IsFinished();
 			}
 
-			switch (this.executionMode)
+			return true;
+		}
+
+		public bool IsAvatarMotionPlaybackPlayerFinished()
+		{
+			// For the competition. Read generated data.
+			if (this.executionMode == ExecutionMode.Competition)
 			{
-				// For the competition. Read generated data.
-				case ExecutionMode.Competition:
-				{
-					if(!this.avatarMotionPlayer.IsFinished()) { return false; }
-					break;
-				}
-				// For data generation. 
-				case ExecutionMode.DataGeneration:
-				{
-					if(!this.avatarMotionRecorder.IsFinished()) { return false; }
-					break;
-				}
-				default:
-				{
-					throw new Exception("Illegal Execution mode. mode=" + CleanupConfig.Instance.configFileInfo.executionMode);
-				}
+				return this.avatarMotionPlayer.IsFinished();
+			}
+
+			return true;
+		}
+
+		public bool IsAvatarMotionPlaybackRecorderFinished()
+		{
+			// For data generation. 
+			if (this.executionMode == ExecutionMode.DataGeneration)
+			{
+				return this.avatarMotionRecorder.IsFinished();
 			}
 
 			return true;
 		}
 
 
-		public void PointObject(Laser laser, ModeratorStep step)
+		public void PointObject(Laser laser, AvatarStateStep avatarStateStep)
 		{
 			switch (this.executionMode)
 			{
 				// For the competition. Read generated data.
 				case ExecutionMode.Competition:
 				{
-					switch (step)
+					switch (avatarStateStep)
 					{
-						case ModeratorStep.SendingPickItUpMsg:
+						case AvatarStateStep.WaitForPickItUp:
 						{
 							this.hasPointedTarget = true;
 							break;
 						}
-						case ModeratorStep.SendingCleanUpMsg:
+						case AvatarStateStep.WaitForCleanUp:
 						{
 							this.hasPointedDestination = true;
 							break;
 						}
 						default:
 						{
-							SIGVerseLogger.Warn("This pointing by the avatar is an invalid timing. step=" + step);
+							SIGVerseLogger.Warn("This pointing by the avatar is an invalid timing. step=" + avatarStateStep);
 							break;
 						}
 					}
@@ -706,16 +771,16 @@ namespace SIGVerse.Competition.InteractiveCleanup
 				// For data generation. 
 				case ExecutionMode.DataGeneration:
 				{
-					switch (step)
+					switch (avatarStateStep)
 					{
-						case ModeratorStep.SendingPickItUpMsg:
+						case AvatarStateStep.WaitForPickItUp:
 						{
 							this.hasPointedTarget = true;
 							this.graspingTarget   = laser.nearestGraspingObject;
 
 							break;
 						}
-						case ModeratorStep.SendingCleanUpMsg:
+						case AvatarStateStep.WaitForCleanUp:
 						{
 							this.hasPointedDestination = true;
 							this.destination           = laser.nearestDestination;
@@ -725,13 +790,16 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 							if (judgeTriggersTransform==null) { throw new Exception("No Judge Triggers object"); }
 
-							judgeTriggersTransform.gameObject.AddComponent<PlacementChecker>();
+							if(judgeTriggersTransform.GetComponent<PlacementChecker>()==null)
+							{
+								judgeTriggersTransform.gameObject.AddComponent<PlacementChecker>();
+							}
 					
 							break;
 						}
 						default:
 						{
-							SIGVerseLogger.Warn("This pointing by the avatar is an invalid timing. step=" + step);
+							SIGVerseLogger.Warn("This pointing by the avatar is an invalid timing. step=" + avatarStateStep);
 							break;
 						}
 					}
@@ -749,9 +817,9 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		{
 			switch (step)
 			{
-				case ModeratorStep.TaskStart:
+				case ModeratorStep.WaitForIamReady:
 				{
-					this.hasPressedButtonForDataGeneration = true;
+					this.hasPressedButtonToStartRecordingAvatarMotion = true;
 					break;
 				}
 				case ModeratorStep.WaitForObjectGrasped:
@@ -759,7 +827,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 				case ModeratorStep.Judgement:
 				case ModeratorStep.WaitForNextTask:
 				{
-					this.StopAvatarMotionPlayback();
+					this.hasPressedButtonToStopRecordingAvatarMotion = true;
 					break;
 				}
 				default:

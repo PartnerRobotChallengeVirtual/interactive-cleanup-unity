@@ -18,12 +18,20 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		WaitForStart,
 		TaskStart,
 		WaitForIamReady, 
-		SendingPickItUpMsg,
-		SendingCleanUpMsg,
 		WaitForObjectGrasped,
 		WaitForTaskFinished,
 		Judgement,
 		WaitForNextTask,
+	}
+
+	public enum AvatarStateStep
+	{
+		Initialize,
+		WaitForPickItUp,
+		WaitForCleanUp,
+		WaitForReturnToInitialPosition,
+		ReturnToInitialPosition,
+		WaitForNextPointing,
 	}
 
 	public class CleanupModerator : MonoBehaviour, IRosMsgReceiveHandler, IAvatarMotionHandler, ITimeIsUpHandler, IGiveUpHandler
@@ -43,6 +51,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		private const string MsgIsThisCorrect = "Is_this_correct?";
 		private const string MsgObjectGrasped = "Object_grasped";
 		private const string MsgTaskFinished  = "Task_finished";
+		private const string MsgPointItAgain  = "Point_it_again";
 		private const string MsgGiveUp        = "Give_up";
 
 		private const string ReasonTimeIsUp = "Time_is_up";
@@ -68,8 +77,9 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		private PanelMainController mainPanelController;
 
 
-		private ExecutionMode executionMode;
-		private ModeratorStep step;
+		private ExecutionMode   executionMode;
+		private ModeratorStep   step;
+		private AvatarStateStep avatarStateStep;
 
 		private Dictionary<string, bool> receivedMessageMap;
 
@@ -105,7 +115,8 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		// Use this for initialization
 		void Start()
 		{
-			this.step = ModeratorStep.Initialize;
+			this.step            = ModeratorStep.Initialize;
+			this.avatarStateStep = AvatarStateStep.Initialize;
 
 			this.isAllTaskFinished = false;
 			this.interruptedReason = string.Empty;
@@ -147,6 +158,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 			this.receivedMessageMap.Add(MsgIsThisCorrect, false);
 			this.receivedMessageMap.Add(MsgObjectGrasped, false);
 			this.receivedMessageMap.Add(MsgTaskFinished,  false);
+			this.receivedMessageMap.Add(MsgPointItAgain,  false);
 			this.receivedMessageMap.Add(MsgGiveUp,        false);
 
 			this.tool.InitializePlayback();
@@ -161,7 +173,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 			if (CleanupConfig.Instance.numberOfTrials == CleanupConfig.Instance.configFileInfo.maxNumberOfTrials)
 			{
-				this.SendRosMessage(MsgMissionComplete, "");
+				this.SendRosMessage(MsgMissionComplete, string.Empty);
 
 				SIGVerseLogger.Info("All tasks finished.");
 
@@ -217,17 +229,11 @@ namespace SIGVerse.Competition.InteractiveCleanup
 					}
 					case ModeratorStep.TaskStart:
 					{
-						// Wait for button pressing when the data generation
-						if(this.executionMode == ExecutionMode.DataGeneration)
-						{
-							if(!this.tool.HasPressedButtonForDataGeneration()) { break; }
-						}
-
 						SIGVerseLogger.Info("Task start!");
 
 						this.scoreManager.TaskStart();
 						
-						this.tool.StartPlayback();
+						this.tool.StartPlaybackRecorder();
 
 						this.step++;
 
@@ -235,9 +241,11 @@ namespace SIGVerse.Competition.InteractiveCleanup
 					}
 					case ModeratorStep.WaitForIamReady:
 					{
-						if (this.executionMode == ExecutionMode.DataGeneration || this.receivedMessageMap[MsgIamReady])
+						// Wait for button pressing when the data generation mode. And wait for receiving I_am_ready when the competition mode.
+						if ((this.executionMode == ExecutionMode.DataGeneration && this.tool.HasPressedButtonToStartRecordingAvatarMotion()) || 
+						    (this.executionMode == ExecutionMode.Competition    && this.receivedMessageMap[MsgIamReady]))
 						{
-							this.tool.StartAvatarMotionPlayback();
+							StartCoroutine(this.StartAvatarStateController());
 
 							this.step++;
 							break;
@@ -245,40 +253,9 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 						if (this.stepTimer.IsTimePassed((int)this.step, SendingAreYouReadyInterval))
 						{
-							this.SendRosMessage(MsgAreYouReady, "");
+							this.SendRosMessage(MsgAreYouReady, string.Empty);
 						}
 
-						break;
-					}
-					case ModeratorStep.SendingPickItUpMsg:
-					{
-						if (this.tool.HasPointedTarget())
-						{
-							this.SendRosMessage(MsgPickItUp, "");
-
-							SIGVerseLogger.Info("Sent '" + MsgPickItUp + "'");
-
-							this.step++;
-						}
-						break;
-					}
-					case ModeratorStep.SendingCleanUpMsg:
-					{
-						if (this.tool.HasPointedDestination())
-						{
-							this.SendRosMessage(MsgCleanUp, "");
-
-							SIGVerseLogger.Info("Sent '" + MsgCleanUp + "'");
-							
-							if(this.executionMode == ExecutionMode.DataGeneration)
-							{
-								this.mainPanelController.SetTaskMessageText(this.tool.GetTaskDetail());
-
-								StartCoroutine(this.tool.SaveEnvironmentInfo());
-							}
-
-							this.step++;
-						}
 						break;
 					}
 					case ModeratorStep.WaitForObjectGrasped:
@@ -294,18 +271,17 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 							if (isSucceeded)
 							{
-								this.SendRosMessage(MsgYes, "");
+								this.SendRosMessage(MsgYes, string.Empty);
 								SIGVerseLogger.Info("It is the correct target.");
 							}
 							else
 							{
-								this.SendRosMessage(MsgNo, "");
+								this.SendRosMessage(MsgNo, string.Empty);
 								SIGVerseLogger.Info("It is the INCORRECT target.");
 							}
 
 							this.scoreManager.AddScore(Score.Type.AskedCorrectOrNot);
 						}
-
 
 						if (this.receivedMessageMap[MsgObjectGrasped])
 						{
@@ -412,7 +388,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 		private void GoToNextTaskTaskSucceeded()
 		{
-			this.GoToNextTask(MsgTaskSucceeded, "");
+			this.GoToNextTask(MsgTaskSucceeded, string.Empty);
 		}
 
 		private void GoToNextTaskTaskFailed(string detail)
@@ -465,6 +441,106 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		}
 
 
+
+		private IEnumerator StartAvatarStateController()
+		{
+			bool isAvatarControlling = true;
+
+			int numberOfPointing = 1;
+
+			while(isAvatarControlling)
+			{
+				if(this.step==ModeratorStep.WaitForNextTask){ isAvatarControlling = false; }
+
+				switch (this.avatarStateStep)
+				{
+					case AvatarStateStep.Initialize:
+					{
+						this.tool.StartAvatarMotionPlaybackPlayer();
+						this.tool.StartAvatarMotionPlaybackRecorder();
+
+						this.avatarStateStep++;
+
+						break;
+					}
+					case AvatarStateStep.WaitForPickItUp:
+					{
+						if (this.tool.HasPointedTarget())
+						{
+							this.SendRosMessage(MsgPickItUp, string.Empty);
+
+							SIGVerseLogger.Info("Sent '" + MsgPickItUp + "'");
+
+							this.avatarStateStep++;
+						}
+						break;
+					}
+					case AvatarStateStep.WaitForCleanUp:
+					{
+						if (this.tool.HasPointedDestination())
+						{
+							this.SendRosMessage(MsgCleanUp, string.Empty);
+
+							SIGVerseLogger.Info("Sent '" + MsgCleanUp + "'");
+							
+							if(this.executionMode == ExecutionMode.DataGeneration && numberOfPointing==1)
+							{
+								this.mainPanelController.SetTaskMessageText(this.tool.GetTaskDetail());
+
+								StartCoroutine(this.tool.SaveEnvironmentInfo());
+							}
+
+							this.avatarStateStep++;
+						}
+						break;
+					}
+					case AvatarStateStep.WaitForReturnToInitialPosition:
+					{
+						if((this.executionMode == ExecutionMode.DataGeneration && this.tool.HasPressedButtonToStopRecordingAvatarMotion()) ||
+						   (this.executionMode == ExecutionMode.Competition    && this.tool.IsAvatarMotionPlaybackPlayerFinished()))
+						{
+							this.tool.StopAvatarMotionPlaybackRecorder();
+
+							this.avatarStateStep++;
+						}
+						break;
+					}
+					case AvatarStateStep.ReturnToInitialPosition:
+					{
+						if(this.executionMode == ExecutionMode.Competition)
+						{
+							IEnumerator makeAvatarInitialPosture = this.tool.MakeAvatarInitialPosture();
+
+							yield return StartCoroutine(makeAvatarInitialPosture);
+						}
+							
+						this.avatarStateStep++;
+
+						break;
+					}
+					case AvatarStateStep.WaitForNextPointing:
+					{
+						if (this.executionMode == ExecutionMode.Competition && this.receivedMessageMap[MsgPointItAgain])
+						{
+							this.receivedMessageMap[MsgPointItAgain] = false;
+
+							this.tool.ResetPointingStatus();
+
+							numberOfPointing++;
+
+							this.avatarStateStep = AvatarStateStep.Initialize;
+						}
+
+						break;
+					}
+				}
+
+				yield return null;
+			}
+		}
+
+
+
 		public void OnReceiveRosMessage(RosBridge.interactive_cleanup.InteractiveCleanupMsg interactiveCleanupMsg)
 		{
 			if(this.receivedMessageMap.ContainsKey(interactiveCleanupMsg.message))
@@ -472,22 +548,31 @@ namespace SIGVerse.Competition.InteractiveCleanup
 				// Check message order
 				if(interactiveCleanupMsg.message==MsgIamReady)
 				{
-					if(this.step!=ModeratorStep.WaitForIamReady) { SIGVerseLogger.Warn("Illegal timing. message : " + interactiveCleanupMsg.message); return; }
+					if(this.step!=ModeratorStep.WaitForIamReady) { this.LogMsgAtIllegalTiming(interactiveCleanupMsg.message); return; }
 				}
 
 				if(interactiveCleanupMsg.message==MsgIsThisCorrect)
 				{
-					if(this.step!=ModeratorStep.WaitForObjectGrasped) { SIGVerseLogger.Warn("Illegal timing. message : " + interactiveCleanupMsg.message); return; }
+					if(this.step!=ModeratorStep.WaitForObjectGrasped) { this.LogMsgAtIllegalTiming(interactiveCleanupMsg.message); return; }
 				}
 
 				if(interactiveCleanupMsg.message==MsgObjectGrasped)
 				{
-					if(this.step!=ModeratorStep.WaitForObjectGrasped) { SIGVerseLogger.Warn("Illegal timing. message : " + interactiveCleanupMsg.message); return; }
+					if(this.step!=ModeratorStep.WaitForObjectGrasped) { this.LogMsgAtIllegalTiming(interactiveCleanupMsg.message); return; }
 				}
 
 				if(interactiveCleanupMsg.message==MsgTaskFinished)
 				{
-					if(this.step!=ModeratorStep.WaitForTaskFinished) { SIGVerseLogger.Warn("Illegal timing. message : " + interactiveCleanupMsg.message); return; }
+					if(this.step!=ModeratorStep.WaitForTaskFinished) { this.LogMsgAtIllegalTiming(interactiveCleanupMsg.message); return; }
+				}
+
+				if(interactiveCleanupMsg.message==MsgPointItAgain)
+				{
+					if(this.executionMode == ExecutionMode.DataGeneration) { SIGVerseLogger.Warn("In the data generation mode, can not request a re-pointing"); return; }
+
+					Debug.Log("this.avatarStateStep=" + this.avatarStateStep);
+
+					if(this.avatarStateStep!=AvatarStateStep.WaitForNextPointing) { this.LogMsgAtIllegalTiming(interactiveCleanupMsg.message); return; }
 				}
 
 				if(interactiveCleanupMsg.message==MsgGiveUp)
@@ -503,15 +588,20 @@ namespace SIGVerse.Competition.InteractiveCleanup
 			}
 		}
 
+		private void LogMsgAtIllegalTiming(string message)
+		{
+			SIGVerseLogger.Warn("Illegal timing. message : " + message);
+		}
+
 
 		public void OnAvatarPointByLeft()
 		{
-			this.tool.PointObject(this.laserLeft, this.step);
+			this.tool.PointObject(this.laserLeft, this.avatarStateStep);
 		}
 
 		public void OnAvatarPointByRight()
 		{
-			this.tool.PointObject(this.laserRight, this.step);
+			this.tool.PointObject(this.laserRight, this.avatarStateStep);
 		}
 
 		public void OnAvatarPressA()

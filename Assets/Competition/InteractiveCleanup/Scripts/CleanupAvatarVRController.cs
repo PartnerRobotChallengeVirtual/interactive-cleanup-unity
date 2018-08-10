@@ -28,6 +28,8 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 		public List<GameObject> avatarMotionDestinations;
 
+		public GameObject initialPositionMarker;
+
 		//----------------------------------------
 
 		private CapsuleCollider       rootCapsuleCollider;
@@ -72,6 +74,8 @@ namespace SIGVerse.Competition.InteractiveCleanup
 					this.simpleIK               .enabled = false;
 					foreach(CleanupAvatarVRHandController cleanupAvatarVRHandController in this.cleanupAvatarVRHandControllers){ cleanupAvatarVRHandController.enabled = false; }
 
+					this.initialPositionMarker.SetActive(false);
+
 					this.enabled = false;
 
 					break;
@@ -88,6 +92,8 @@ namespace SIGVerse.Competition.InteractiveCleanup
 					this.simpleHumanVRController.enabled = true;
 					this.simpleIK               .enabled = true;
 					foreach(CleanupAvatarVRHandController cleanupAvatarVRHandController in this.cleanupAvatarVRHandControllers){ cleanupAvatarVRHandController.enabled = true; }
+
+					this.initialPositionMarker.SetActive(true);
 
 					break;
 				}

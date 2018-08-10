@@ -95,6 +95,11 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		{
 			base.transformController.ExecuteFirstEvent();
 		}
+
+		public List<PlaybackTransformEvent> GetFirstPostureOfAvatar()
+		{
+			return base.transformController.eventLists[0].EventList;
+		}
 	}
 }
 
