@@ -20,6 +20,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 			CleanupSuccess,
 			CleanupFailure,
 			AskedCorrectOrNot,
+			PointItAgain,
 			HsrCollisionEnter,
 			ObjectCollisionEnter,
 		}
@@ -33,6 +34,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 				case Score.Type.CleanupSuccess      : { return +50; }
 				case Score.Type.CleanupFailure      : { return -10; }
 				case Score.Type.AskedCorrectOrNot   : { return -10; }
+				case Score.Type.PointItAgain        : { return -10; }
 				case Score.Type.HsrCollisionEnter   : { return GetHsrCollisionScore   ((Collision)args[0], (float)args[1]); }
 				case Score.Type.ObjectCollisionEnter: { return GetObjectCollisionScore((SIGVerse.Competition.CollisionType)args[0], (Collision)args[1], (float)args[2]); }
 			}

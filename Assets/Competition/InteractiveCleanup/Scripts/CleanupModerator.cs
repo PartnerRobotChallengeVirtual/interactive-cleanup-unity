@@ -524,6 +524,8 @@ namespace SIGVerse.Competition.InteractiveCleanup
 						{
 							this.receivedMessageMap[MsgPointItAgain] = false;
 
+							this.scoreManager.AddScore(Score.Type.PointItAgain);
+
 							this.tool.ResetPointingStatus();
 
 							numberOfPointing++;
