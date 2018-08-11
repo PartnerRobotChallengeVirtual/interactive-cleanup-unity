@@ -9207,6 +9207,8 @@ MonoBehaviour:
   subviewPositionType: 2
   offsetX: 15
   offsetY: 15
+  sizeX: 480
+  sizeY: 320
 --- !u!114 &587772705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9221,8 +9223,10 @@ MonoBehaviour:
   subviewCamera: {fileID: 1826810827}
   subviewType: 2
   subviewPositionType: 3
-  offsetX: 15
-  offsetY: 15
+  offsetX: 0
+  offsetY: 0
+  sizeX: 600
+  sizeY: 400
 --- !u!4 &587772706
 Transform:
   m_ObjectHideFlags: 0
