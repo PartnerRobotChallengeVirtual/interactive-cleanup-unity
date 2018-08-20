@@ -45,6 +45,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 		private IRosConnection[] rosConnections;
 
+		private string taskMessage;
 		private string environmentName;
 		private GameObject graspingTarget;
 		private GameObject destination;
@@ -84,6 +85,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 			EnvironmentInfo environmentInfo = this.EnableEnvironment(environments);
 
+			this.taskMessage     = environmentInfo.taskMessage;
 			this.environmentName = environmentInfo.environmentName;
 
 			this.GetGameObjects(avatarMotionPlayback, worldPlayback);
@@ -405,7 +407,23 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 		public string GetTaskDetail()
 		{
-			return "Target=" + this.graspingTarget.name + ",  Destination=" + this.destination.name;
+			switch (this.executionMode)
+			{
+				// For the competition. Read generated data.
+				case ExecutionMode.Competition:
+				{
+					return this.taskMessage;
+				}
+				// For data generation. 
+				case ExecutionMode.DataGeneration:
+				{
+					return "Target=" + this.graspingTarget.name + ",  Destination=" + this.destination.name;
+				}
+				default:
+				{
+					throw new Exception("Illegal Execution mode. mode=" + CleanupConfig.Instance.configFileInfo.executionMode);
+				}
+			}
 		}
 
 
