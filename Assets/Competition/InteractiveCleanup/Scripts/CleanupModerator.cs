@@ -65,6 +65,8 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		public GameObject avatarMotionPlayback;
 		public GameObject playbackManager;
 
+		public AudioSource objectCollisionAudioSource;
+
 		public Laser laserLeft;
 		public Laser laserRight;
 
@@ -93,7 +95,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		{
 			try
 			{
-				this.tool = new CleanupModeratorTool(this.environments, this.scoreManager, this.avatarMotionPlayback, this.playbackManager);
+				this.tool = new CleanupModeratorTool(this);
 
 				this.stepTimer = new StepTimer();
 

@@ -77,20 +77,19 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		private CleanupPlaybackRecorder playbackRecorder;
 
 
-		public CleanupModeratorTool(List<GameObject> environments, CleanupScoreManager scoreManager, GameObject avatarMotionPlayback, GameObject worldPlayback)
+		public CleanupModeratorTool(CleanupModerator moderator)
 		{
 			CleanupConfig.Instance.InclementNumberOfTrials();
 
 			this.executionMode = (ExecutionMode)Enum.ToObject(typeof(ExecutionMode), CleanupConfig.Instance.configFileInfo.executionMode);
 
-			EnvironmentInfo environmentInfo = this.EnableEnvironment(environments);
+			EnvironmentInfo environmentInfo = this.EnableEnvironment(moderator.environments);
 
-			this.taskMessage     = environmentInfo.taskMessage;
 			this.environmentName = environmentInfo.environmentName;
 
-			this.GetGameObjects(avatarMotionPlayback, worldPlayback);
+			this.GetGameObjects(moderator.avatarMotionPlayback, moderator.playbackManager);
 
-			this.Initialize(environmentInfo, scoreManager);
+			this.Initialize(environmentInfo, moderator.scoreManager, moderator.objectCollisionAudioSource);
 		}
 
 
@@ -215,7 +214,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		}
 
 
-		public void Initialize(EnvironmentInfo environmentInfo, CleanupScoreManager scoreManager)
+		public void Initialize(EnvironmentInfo environmentInfo, CleanupScoreManager scoreManager, AudioSource objectCollisionAudioSource)
 		{
 			List<GameObject> objectCollisionDestinations = new List<GameObject>();
 			objectCollisionDestinations.Add(scoreManager.gameObject);
@@ -225,7 +224,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 			{
 				CollisionTransferer collisionTransferer = graspable.AddComponent<CollisionTransferer>();
 
-				collisionTransferer.Initialize(objectCollisionDestinations, Score.GetObjectCollisionVeloticyThreshold());
+				collisionTransferer.Initialize(objectCollisionDestinations, Score.GetObjectCollisionVeloticyThreshold(), 0.1f, objectCollisionAudioSource);
 			}
 
 
