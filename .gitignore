@@ -54,6 +54,9 @@ SIGVerse*.log
 /SIGVerseConfig/InteractiveCleanup/*
 !/SIGVerseConfig/InteractiveCleanup/sample/
 
+/TTS/*
+!/TTS/.gitkeep
+
 
 /Assets/OVR*
 /Assets/Plugins*

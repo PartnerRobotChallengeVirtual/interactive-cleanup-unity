@@ -201,9 +201,17 @@ namespace SIGVerse.Competition.InteractiveCleanup
 				if(this.interruptedReason!=string.Empty && this.step != ModeratorStep.WaitForNextTask)
 				{
 					SIGVerseLogger.Info("Failed '" + this.interruptedReason + "'");
+					this.SendPanelNotice("Failed\n"+ this.interruptedReason.Replace('_',' '), 100, PanelNoticeStatus.Red);
 
-					this.SendPanelNotice("Failed\n"+ interruptedReason.Replace('_',' '), 100, PanelNoticeStatus.Red);
-
+					if(this.interruptedReason==ReasonTimeIsUp)
+					{
+						this.tool.AddSpeechQueModerator(ReasonTimeIsUp);
+					}
+					else if(this.interruptedReason==ReasonGiveUp)
+					{
+						this.tool.AddSpeechQueHsr(ReasonGiveUp);
+					}
+					
 					this.GoToNextTaskTaskFailed(this.interruptedReason);
 				}
 
@@ -232,6 +240,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 					case ModeratorStep.TaskStart:
 					{
 						SIGVerseLogger.Info("Task start!");
+						this.tool.AddSpeechQueModerator("Task start!");
 
 						this.scoreManager.TaskStart();
 						
@@ -274,11 +283,13 @@ namespace SIGVerse.Competition.InteractiveCleanup
 							if (isSucceeded)
 							{
 								this.SendRosMessage(MsgYes, string.Empty);
+								this.tool.AddSpeechQueModerator("Yes");
 								SIGVerseLogger.Info("It is the correct target.");
 							}
 							else
 							{
 								this.SendRosMessage(MsgNo, string.Empty);
+								this.tool.AddSpeechQueModerator("No");
 								SIGVerseLogger.Info("It is the INCORRECT target.");
 							}
 
@@ -295,12 +306,14 @@ namespace SIGVerse.Competition.InteractiveCleanup
 								SIGVerseLogger.Info("Succeeded '" + MsgObjectGrasped + "'");
 								this.SendPanelNotice("Good", 150, PanelNoticeStatus.Green);
 								this.scoreManager.AddScore(Score.Type.ObjectGraspedSuccess);
+								this.tool.AddSpeechQueModeratorGood();
 							}
 							else
 							{
 								SIGVerseLogger.Info("Failed '" + MsgObjectGrasped + "'");
 								this.SendPanelNotice("Failed\n" + MsgObjectGrasped.Replace('_', ' '), 100, PanelNoticeStatus.Red);
 								this.scoreManager.AddScore(Score.Type.ObjectGraspedFailure);
+								this.tool.AddSpeechQueModeratorFailed();
 
 								this.GoToNextTaskTaskFailed("Failed " + MsgObjectGrasped);
 
@@ -344,6 +357,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 								SIGVerseLogger.Info("Succeeded '" + MsgTaskFinished + "'");
 								this.SendPanelNotice("Succeeded!", 150, PanelNoticeStatus.Green);
 								this.scoreManager.AddScore(Score.Type.CleanupSuccess);
+								this.tool.AddSpeechQueModerator("Excellent!");
 
 								this.GoToNextTaskTaskSucceeded();
 							}
@@ -352,6 +366,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 								SIGVerseLogger.Info("Failed '" + MsgTaskFinished + "'");
 								this.SendPanelNotice("Failed", 150, PanelNoticeStatus.Red);
 								this.scoreManager.AddScore(Score.Type.CleanupFailure);
+								this.tool.AddSpeechQueModeratorFailed();
 
 								this.GoToNextTaskTaskFailed("Failed " + MsgTaskFinished);
 							}
@@ -361,7 +376,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 					}
 					case ModeratorStep.WaitForNextTask:
 					{
-						if (this.stepTimer.IsTimePassed((int)this.step, 5000))
+						if (this.stepTimer.IsTimePassed((int)this.step, 5000) && !this.tool.IsSpeaking())
 						{
 							if(!this.tool.IsPlaybackFinished()) { break; }
 
@@ -371,6 +386,8 @@ namespace SIGVerse.Competition.InteractiveCleanup
 						break;
 					}
 				}
+
+				this.tool.ControlSpeech(this.step==ModeratorStep.WaitForNextTask); // Speech
 			}
 			catch (Exception exception)
 			{
@@ -400,6 +417,8 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 		private void GoToNextTask(string message, string detail)
 		{
+			this.tool.AddSpeechQueModerator("Let's go to the next session");
+
 			this.tool.StopPlayback();
 
 			this.scoreManager.TaskEnd();
@@ -470,7 +489,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 						if (this.tool.HasPointedTarget())
 						{
 							this.SendRosMessage(MsgPickItUp, string.Empty);
-
+							this.tool.AddSpeechQueModerator("Please pick it up");
 							SIGVerseLogger.Info("Sent '" + MsgPickItUp + "'");
 
 							this.avatarStateStep++;
@@ -482,7 +501,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 						if (this.tool.HasPointedDestination())
 						{
 							this.SendRosMessage(MsgCleanUp, string.Empty);
-
+							this.tool.AddSpeechQueModerator("Please clean up");
 							SIGVerseLogger.Info("Sent '" + MsgCleanUp + "'");
 							
 							if(this.executionMode == ExecutionMode.DataGeneration && numberOfPointing==1)
@@ -558,25 +577,28 @@ namespace SIGVerse.Competition.InteractiveCleanup
 				if(interactiveCleanupMsg.message==MsgIsThisCorrect)
 				{
 					if(this.step!=ModeratorStep.WaitForObjectGrasped) { this.LogMsgAtIllegalTiming(interactiveCleanupMsg.message); return; }
+					this.tool.AddSpeechQueHsr(MsgIsThisCorrect);
 				}
 
 				if(interactiveCleanupMsg.message==MsgObjectGrasped)
 				{
 					if(this.step!=ModeratorStep.WaitForObjectGrasped) { this.LogMsgAtIllegalTiming(interactiveCleanupMsg.message); return; }
+					this.tool.AddSpeechQueHsr("I grasped the object");
 				}
 
 				if(interactiveCleanupMsg.message==MsgTaskFinished)
 				{
 					if(this.step!=ModeratorStep.WaitForTaskFinished) { this.LogMsgAtIllegalTiming(interactiveCleanupMsg.message); return; }
+					this.tool.AddSpeechQueHsr(MsgTaskFinished);
 				}
 
 				if(interactiveCleanupMsg.message==MsgPointItAgain)
 				{
 					if(this.executionMode == ExecutionMode.DataGeneration) { SIGVerseLogger.Warn("In the data generation mode, can not request a re-pointing"); return; }
 
-					Debug.Log("this.avatarStateStep=" + this.avatarStateStep);
-
 					if(this.avatarStateStep!=AvatarStateStep.WaitForNextPointing) { this.LogMsgAtIllegalTiming(interactiveCleanupMsg.message); return; }
+
+					this.tool.AddSpeechQueHsr("Could you point it again?");
 				}
 
 				if(interactiveCleanupMsg.message==MsgGiveUp)
@@ -621,14 +643,14 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 		public void OnTimeIsUp()
 		{
-			this.interruptedReason = CleanupModerator.ReasonTimeIsUp;
+			this.interruptedReason = ReasonTimeIsUp;
 		}
 
 		public void OnGiveUp()
 		{
 			if(this.step > ModeratorStep.TaskStart && this.step < ModeratorStep.WaitForNextTask)
 			{
-				this.interruptedReason = CleanupModerator.ReasonGiveUp;
+				this.interruptedReason = ReasonGiveUp;
 			}
 			else
 			{

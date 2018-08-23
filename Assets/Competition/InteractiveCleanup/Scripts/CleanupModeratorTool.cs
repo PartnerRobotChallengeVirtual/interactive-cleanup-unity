@@ -31,6 +31,21 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		public List<RelocatableObjectInfo> destinationsPositions; 
 	}
 
+	public class SpeechInfo
+	{
+		public string message;
+		public string gender;
+		public bool   canCancel;
+
+		public SpeechInfo(string message, string gender, bool canCancel)
+		{
+			this.message   = message;
+			this.gender    = gender;
+			this.canCancel = canCancel;
+		}
+	}
+
+
 	public class CleanupModeratorTool
 	{
 		private const string EnvironmentInfoFileNameFormat = "/../SIGVerseConfig/InteractiveCleanup/EnvironmentInfo{0:D2}.json";
@@ -42,6 +57,12 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		private const string TagDestinationCandidates      = "DestinationCandidates";
 
 		private const string JudgeTriggersName = "JudgeTriggers";
+
+		public const string SpeechExePath  = "../TTS/ConsoleSimpleTTS.exe";
+		public const string SpeechLanguage = "409";
+		public const string SpeechGenderModerator = "Male";
+		public const string SpeechGenderHsr       = "Female";
+
 
 		private IRosConnection[] rosConnections;
 
@@ -76,6 +97,13 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 		private CleanupPlaybackRecorder playbackRecorder;
 
+		private System.Diagnostics.Process speechProcess;
+
+		private Queue<SpeechInfo> speechInfoQue;
+		private SpeechInfo latestSpeechInfo;
+
+		private bool isSpeechUsed;
+
 
 		public CleanupModeratorTool(CleanupModerator moderator)
 		{
@@ -85,6 +113,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 			EnvironmentInfo environmentInfo = this.EnableEnvironment(moderator.environments);
 
+			this.taskMessage     = environmentInfo.taskMessage;
 			this.environmentName = environmentInfo.environmentName;
 
 			this.GetGameObjects(moderator.avatarMotionPlayback, moderator.playbackManager);
@@ -319,6 +348,20 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 			SIGVerseLogger.Info("ROS connection : count=" + this.rosConnections.Length);
 
+
+			// Set up the voice (Using External executable file)
+			this.speechProcess = new System.Diagnostics.Process();
+			this.speechProcess.StartInfo.FileName = Application.dataPath + "/" + SpeechExePath;
+			this.speechProcess.StartInfo.CreateNoWindow = true;
+			this.speechProcess.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+
+			this.isSpeechUsed = System.IO.File.Exists(this.speechProcess.StartInfo.FileName);
+
+			this.speechInfoQue = new Queue<SpeechInfo>();
+
+			SIGVerseLogger.Info("Text-To-Speech: " + Application.dataPath + "/" + SpeechExePath);
+
+
 			this.hasPressedButtonToStartRecordingAvatarMotion = false;
 			this.hasPressedButtonToStopRecordingAvatarMotion  = false;
 
@@ -423,6 +466,87 @@ namespace SIGVerse.Competition.InteractiveCleanup
 					throw new Exception("Illegal Execution mode. mode=" + CleanupConfig.Instance.configFileInfo.executionMode);
 				}
 			}
+		}
+
+
+		public void ControlSpeech(bool isTaskFinished)
+		{
+			if(!this.isSpeechUsed){ return; }
+
+			// Cancel current speech that can be canceled when task finished
+			try
+			{
+				if (isTaskFinished && this.latestSpeechInfo!=null && this.latestSpeechInfo.canCancel && !this.speechProcess.HasExited)
+				{
+					this.speechProcess.Kill();
+				}
+			}
+			catch (Exception)
+			{
+				SIGVerseLogger.Warn("Do nothing even if an error occurs");
+				// Do nothing even if an error occurs
+			}
+
+
+			if (this.speechInfoQue.Count <= 0){ return; }
+
+			// Return if the current speech is not over
+			if (this.latestSpeechInfo!=null && !this.speechProcess.HasExited){ return; }
+
+
+			SpeechInfo speechInfo = this.speechInfoQue.Dequeue();
+
+			if(isTaskFinished && speechInfo.canCancel){ return; }
+
+			this.latestSpeechInfo = speechInfo;
+
+			string message = this.latestSpeechInfo.message.Replace("_", " "); // Remove "_"
+
+			this.speechProcess.StartInfo.Arguments = "\"" + message + "\" \"Language=" + SpeechLanguage + "; Gender=" + this.latestSpeechInfo.gender + "\"";
+
+			try
+			{
+				this.speechProcess.Start();
+
+				SIGVerseLogger.Info("Spoke :" + message);
+			}
+			catch (Exception)
+			{
+				SIGVerseLogger.Warn("Could not speak :" + message);
+			}
+		}
+
+
+		public void AddSpeechQue(string message, string gender, bool canCancel = false)
+		{
+			if(!this.isSpeechUsed){ return; }
+
+			this.speechInfoQue.Enqueue(new SpeechInfo(message, gender, canCancel));
+		}
+
+		public void AddSpeechQueModerator(string message, bool canCancel = false)
+		{
+			this.AddSpeechQue(message, SpeechGenderModerator, canCancel);
+		}
+
+		public void AddSpeechQueModeratorGood(bool canCancel = false)
+		{
+			this.AddSpeechQue("Good job", SpeechGenderModerator, canCancel);
+		}
+
+		public void AddSpeechQueModeratorFailed(bool canCancel = false)
+		{
+			this.AddSpeechQue("That's too bad", SpeechGenderModerator, canCancel);
+		}
+
+		public void AddSpeechQueHsr(string message, bool canCancel = false)
+		{
+			this.AddSpeechQue(message, SpeechGenderHsr, canCancel);
+		}
+
+		public bool IsSpeaking()
+		{
+			return this.speechInfoQue.Count != 0 || (this.latestSpeechInfo!=null && !this.speechProcess.HasExited);
 		}
 
 
