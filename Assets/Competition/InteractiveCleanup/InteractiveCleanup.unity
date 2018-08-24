@@ -8867,7 +8867,7 @@ MonoBehaviour:
   bodyAnchor: {fileID: 588166686}
   fixedParts:
   - {fileID: 1227776495}
-  moveSpeedByController: 0.6
+  moveSpeedByController: 0.3
   moveSpeedByHmd: 4
 --- !u!4 &536172262
 Transform:
