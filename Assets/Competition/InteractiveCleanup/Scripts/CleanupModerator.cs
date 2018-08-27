@@ -304,14 +304,15 @@ namespace SIGVerse.Competition.InteractiveCleanup
 							if (isSucceeded)
 							{
 								SIGVerseLogger.Info("Succeeded '" + MsgObjectGrasped + "'");
-								this.SendPanelNotice("Good", 150, PanelNoticeStatus.Green);
+								this.SendPanelNotice("Good Job", 150, PanelNoticeStatus.Green);
 								this.scoreManager.AddScore(Score.Type.ObjectGraspedSuccess);
 								this.tool.AddSpeechQueModeratorGood();
 							}
 							else
 							{
+								string detail = "Failed to grasp";
 								SIGVerseLogger.Info("Failed '" + MsgObjectGrasped + "'");
-								this.SendPanelNotice("Failed\n" + MsgObjectGrasped.Replace('_', ' '), 100, PanelNoticeStatus.Red);
+								this.SendPanelNotice("Failed\n" + detail, 100, PanelNoticeStatus.Red);
 								this.scoreManager.AddScore(Score.Type.ObjectGraspedFailure);
 								this.tool.AddSpeechQueModeratorFailed();
 
@@ -355,7 +356,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 							if (isSucceeded)
 							{
 								SIGVerseLogger.Info("Succeeded '" + MsgTaskFinished + "'");
-								this.SendPanelNotice("Succeeded!", 150, PanelNoticeStatus.Green);
+								this.SendPanelNotice("Task Completed", 120, PanelNoticeStatus.Green);
 								this.scoreManager.AddScore(Score.Type.CleanupSuccess);
 								this.tool.AddSpeechQueModerator("Excellent!");
 
@@ -363,8 +364,9 @@ namespace SIGVerse.Competition.InteractiveCleanup
 							}
 							else
 							{
+								string detail = "You didn't complete";
 								SIGVerseLogger.Info("Failed '" + MsgTaskFinished + "'");
-								this.SendPanelNotice("Failed", 150, PanelNoticeStatus.Red);
+								this.SendPanelNotice("Failed\n" + detail, 100, PanelNoticeStatus.Red);
 								this.scoreManager.AddScore(Score.Type.CleanupFailure);
 								this.tool.AddSpeechQueModeratorFailed();
 
