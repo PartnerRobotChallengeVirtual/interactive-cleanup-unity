@@ -1,11 +1,11 @@
 {
-    "taskMessage": "Target=sauce,  Destination=low_table",
+    "taskMessage": "Target=sauce#1,  Destination=square_low_table",
     "environmentName": "Environment_01",
-    "graspingTargetName": "sauce",
-    "destinationName": "low_table",
+    "graspingTargetName": "sauce#1",
+    "destinationName": "square_low_table",
     "graspablesPositions": [
         {
-            "name": "pepper",
+            "name": "ground_pepper#1",
             "position": {
                 "x": -4.5,
                 "y": 0.0010000020265579224,
@@ -18,7 +18,7 @@
             }
         },
         {
-            "name": "block_car",
+            "name": "toy_car#1",
             "position": {
                 "x": -2.859999895095825,
                 "y": 0.0010000020265579224,
@@ -31,7 +31,7 @@
             }
         },
         {
-            "name": "sugar",
+            "name": "sugar#1",
             "position": {
                 "x": -6.079999923706055,
                 "y": 0.7259999513626099,
@@ -44,7 +44,7 @@
             }
         },
         {
-            "name": "toy_duck",
+            "name": "toy_duck#1",
             "position": {
                 "x": -4.533999919891357,
                 "y": 0.6229999661445618,
@@ -57,7 +57,7 @@
             }
         },
         {
-            "name": "sauce",
+            "name": "sauce#1",
             "position": {
                 "x": -5.480000019073486,
                 "y": 0.7259999513626099,
@@ -70,7 +70,7 @@
             }
         },
         {
-            "name": "nursing_bottle",
+            "name": "nursing_bottle#1",
             "position": {
                 "x": -0.75,
                 "y": 0.0010000020265579224,
@@ -83,7 +83,7 @@
             }
         },
         {
-            "name": "tumbler",
+            "name": "tumbler#1",
             "position": {
                 "x": -2.819999933242798,
                 "y": 0.0010000020265579224,
@@ -96,7 +96,7 @@
             }
         },
         {
-            "name": "apple",
+            "name": "apple#1",
             "position": {
                 "x": -0.3400000035762787,
                 "y": 0.0010000020265579224,
@@ -109,7 +109,7 @@
             }
         },
         {
-            "name": "soysauce",
+            "name": "soysauce#1",
             "position": {
                 "x": -0.375,
                 "y": 0.4960000216960907,
@@ -122,7 +122,7 @@
             }
         },
         {
-            "name": "pink_cup",
+            "name": "pink_cup#1",
             "position": {
                 "x": -4.635000228881836,
                 "y": 0.0010000020265579224,
@@ -135,7 +135,7 @@
             }
         },
         {
-            "name": "canned_juice",
+            "name": "canned_juice#1",
             "position": {
                 "x": -1.059999942779541,
                 "y": 0.0010000020265579224,
@@ -148,7 +148,7 @@
             }
         },
         {
-            "name": "dog_doll",
+            "name": "dog_doll#1",
             "position": {
                 "x": -5.072999954223633,
                 "y": 0.4440000057220459,
@@ -161,7 +161,7 @@
             }
         },
         {
-            "name": "ketchup",
+            "name": "filled_ketchup#1",
             "position": {
                 "x": -4.409999847412109,
                 "y": 0.0010000020265579224,
@@ -174,7 +174,7 @@
             }
         },
         {
-            "name": "empty_mayonnaise",
+            "name": "empty_plastic_bottle#1",
             "position": {
                 "x": -5.839000225067139,
                 "y": 0.4440000057220459,
@@ -187,7 +187,7 @@
             }
         },
         {
-            "name": "bear_doll",
+            "name": "bear_doll#1",
             "position": {
                 "x": -0.37299999594688418,
                 "y": 0.4960000216960907,
@@ -200,7 +200,7 @@
             }
         },
         {
-            "name": "rabbit_doll",
+            "name": "rabbit_doll#1",
             "position": {
                 "x": -3.240000009536743,
                 "y": 0.0010000020265579224,
@@ -228,7 +228,7 @@
             }
         },
         {
-            "name": "white_table#1",
+            "name": "white_side_table#1",
             "position": {
                 "x": -0.11999999731779099,
                 "y": 0.0,
@@ -254,7 +254,7 @@
             }
         },
         {
-            "name": "low_table",
+            "name": "square_low_table",
             "position": {
                 "x": -5.52400016784668,
                 "y": 0.0,
@@ -267,7 +267,7 @@
             }
         },
         {
-            "name": "white_table#2",
+            "name": "white_side_table#2",
             "position": {
                 "x": -0.8100000023841858,
                 "y": 0.0,

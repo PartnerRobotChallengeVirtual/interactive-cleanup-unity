@@ -95,6 +95,8 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		{
 			try
 			{
+				if(CleanupConfig.Instance.configFileInfo.playbackType == WorldPlaybackCommon.PlaybackTypePlay) { return; }
+
 				this.tool = new CleanupModeratorTool(this);
 
 				this.stepTimer = new StepTimer();

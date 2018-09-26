@@ -116,7 +116,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 			this.taskMessage     = environmentInfo.taskMessage;
 			this.environmentName = environmentInfo.environmentName;
 
-			this.GetGameObjects(moderator.avatarMotionPlayback, moderator.playbackManager);
+			this.GetGameObjects(environmentInfo, moderator.avatarMotionPlayback, moderator.playbackManager);
 
 			this.Initialize(environmentInfo, moderator.scoreManager, moderator.objectCollisionAudioSource);
 		}
@@ -179,20 +179,14 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		}
 
 
-		private void GetGameObjects(GameObject avatarMotionPlayback, GameObject worldPlayback)
+		private void GetGameObjects(EnvironmentInfo environmentInfo, GameObject avatarMotionPlayback, GameObject worldPlayback)
 		{
 			this.robot = GameObject.FindGameObjectWithTag(TagRobot);
 
 			this.hsrGraspingDetector = this.robot.GetComponentInChildren<HSRGraspingDetector>();
 
-			
 			// Get grasping candidates
-			List<GameObject> graspingCandidates = GameObject.FindGameObjectsWithTag(TagGraspingCandidates).ToList<GameObject>();
-
-			if (graspingCandidates.Count == 0)
-			{
-				throw new Exception("Count of GraspingCandidates is zero.");
-			}
+			List<GameObject> graspingCandidates = ExtractGraspingCandidates(environmentInfo);
 
 //			List<GameObject> dummyGraspingCandidates = GameObject.FindGameObjectsWithTag(TagDummyGraspingCandidates).ToList<GameObject>();
 
@@ -242,6 +236,53 @@ namespace SIGVerse.Competition.InteractiveCleanup
 			this.playbackRecorder = worldPlayback.GetComponent<CleanupPlaybackRecorder>();
 		}
 
+		public List<GameObject> ExtractGraspingCandidates(EnvironmentInfo environmentInfo)
+		{
+			// Temporarily activate all grasping candidates
+			if(this.executionMode==ExecutionMode.Competition)
+			{
+				GameObject graspingCandidatesObj = GameObject.Find("GraspingCandidates");
+
+				foreach (Transform graspingCandidate in graspingCandidatesObj.transform)
+				{
+					graspingCandidate.gameObject.SetActive(true);
+				}
+			}
+
+			// Get grasping candidates from the tag
+			List<GameObject> graspingCandidates = GameObject.FindGameObjectsWithTag(TagGraspingCandidates).ToList<GameObject>();
+
+			if(this.executionMode==ExecutionMode.Competition)
+			{
+				// Confirm the graspable objects inconsistency
+				List<RelocatableObjectInfo> graspablesOnlyInFile = (from graspablePosition in environmentInfo.graspablesPositions where graspingCandidates.All(graspingcandidate => graspingcandidate.name!=graspablePosition.name) select graspablePosition).ToList();
+
+				if(graspablesOnlyInFile.Count!=0)
+				{
+					SIGVerseLogger.Error("Following objects do not exist in the scene");
+					foreach(RelocatableObjectInfo inFileWithoutScen in graspablesOnlyInFile){ SIGVerseLogger.Error("name=" + inFileWithoutScen.name); }
+					throw new Exception("Some objects do not exist in the scene");
+				}
+
+				// Deactivate unused objects
+				List<GameObject> graspablesOnlyInScene = (from graspingcandidate in graspingCandidates where environmentInfo.graspablesPositions.All(graspablePosition => graspablePosition.name!=graspingcandidate.name) select graspingcandidate).ToList();
+
+				foreach(GameObject graspableOnlyInScene in graspablesOnlyInScene)
+				{
+					graspableOnlyInScene.SetActive(false);
+				}
+
+				// Extract the effective graspable objects
+				graspingCandidates = (from graspingcandidate in graspingCandidates where environmentInfo.graspablesPositions.Any(graspablePosition => graspablePosition.name==graspingcandidate.name) select graspingcandidate).ToList();
+			}
+
+			if (graspingCandidates.Count == 0)
+			{
+				throw new Exception("Count of GraspingCandidates is zero.");
+			}
+
+			return graspingCandidates;
+		}
 
 		public void Initialize(EnvironmentInfo environmentInfo, CleanupScoreManager scoreManager, AudioSource objectCollisionAudioSource)
 		{
@@ -257,7 +298,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 			}
 
 
-			this.graspablesPositionsMap   = null; //key:GraspablePositionInfo, value:Graspables
+			this.graspablesPositionsMap   = null; //key:GraspablePositionInfo,   value:Graspables
 			this.destinationsPositionsMap = null; //key:DestinationPositionInfo, value:DestinationCandidate
 
 			switch (this.executionMode)
