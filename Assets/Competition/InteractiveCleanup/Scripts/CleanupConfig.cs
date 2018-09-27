@@ -11,6 +11,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 	[System.Serializable]
 	public class CleanupConfigFileInfo
 	{
+		public string teamName;
 		public int  sessionTimeLimit;
 		public int  maxNumberOfTrials;
 		public bool isScoreFileRead;
@@ -64,6 +65,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 			{
 				SIGVerseLogger.Warn("Cleanup config file does not exists.");
 
+				this.configFileInfo.teamName          = "XXXX";
 				this.configFileInfo.sessionTimeLimit  = 360;
 				this.configFileInfo.maxNumberOfTrials = 15;
 				this.configFileInfo.isScoreFileRead   = false;

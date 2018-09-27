@@ -150,6 +150,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 		private void PreProcess()
 		{
+			this.mainPanelController.SetTeamNameText(CleanupConfig.Instance.configFileInfo.teamName);
 			this.mainPanelController.SetTrialNumberText(CleanupConfig.Instance.numberOfTrials);
 
 			SIGVerseLogger.Info("##### " + this.mainPanelController.GetTrialNumberText() + " #####");
