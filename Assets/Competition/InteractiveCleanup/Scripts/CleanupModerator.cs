@@ -180,7 +180,9 @@ namespace SIGVerse.Competition.InteractiveCleanup
 			{
 				this.SendRosMessage(MsgMissionComplete, string.Empty);
 
-				SIGVerseLogger.Info("All tasks finished.");
+				SIGVerseLogger.Info("All sessions have ended.");
+
+				this.tool.AddSpeechQueModerator("All sessions have ended");
 
 				StartCoroutine(this.tool.CloseRosConnections());
 
@@ -188,6 +190,8 @@ namespace SIGVerse.Competition.InteractiveCleanup
 			}
 			else
 			{
+				this.tool.AddSpeechQueModerator("Let's go to the next session");
+
 				StartCoroutine(this.tool.ClearRosConnections());
 
 				this.step = ModeratorStep.WaitForNextTask;
@@ -199,6 +203,8 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		{
 			try
 			{
+				this.tool.ControlSpeech(this.step==ModeratorStep.WaitForNextTask); // Speech
+
 				if(this.isAllTaskFinished) { return; }
 
 				if(this.interruptedReason!=string.Empty && this.step != ModeratorStep.WaitForNextTask)
@@ -391,8 +397,6 @@ namespace SIGVerse.Competition.InteractiveCleanup
 						break;
 					}
 				}
-
-				this.tool.ControlSpeech(this.step==ModeratorStep.WaitForNextTask); // Speech
 			}
 			catch (Exception exception)
 			{
@@ -422,8 +426,6 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 		private void GoToNextTask(string message, string detail)
 		{
-			this.tool.AddSpeechQueModerator("Let's go to the next session");
-
 			this.tool.StopPlayback();
 
 			this.scoreManager.TaskEnd();
