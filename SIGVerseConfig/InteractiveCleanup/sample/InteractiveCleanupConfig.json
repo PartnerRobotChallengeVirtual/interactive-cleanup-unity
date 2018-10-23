@@ -1,8 +1,8 @@
 ﻿{
-    "teamName": "XXXX",
+    "teamName": "Inter@active Cleanup",
     "sessionTimeLimit": 360,
-    "maxNumberOfTrials": 5,
-    "isScoreFileRead": false,
+    "maxNumberOfTrials": 20,
+    "isScoreFileRead": true,
     "executionMode": 0,
     "isAlwaysGoNext": false,
     "playbackType": 1
