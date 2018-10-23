@@ -11,7 +11,7 @@ See also [wiki page](https://github.com/PartnerRobotChallengeVirtual/interactive
 ## Prerequisites
 
 - OS: Windows 10
-- Unity version: 2017.3
+- Unity version: 2017.3.1
 
 ## How to Build
 
