@@ -5,6 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Competition/InteractiveCleanup/InteractiveCleanup.unity
     guid: 346836b36f6b76e408d4200eac2406a7
+  - enabled: 1
+    path: Assets/Competition/InteractiveCleanup/InteractiveCleanup201810.unity
+    guid: 791bf15c5582ddc4caf8cdc672f93da5
+  - enabled: 0
+    path: Assets/Competition/InteractiveCleanup/InteractiveCleanup201810_Layout.unity
+    guid: 58a6995153e8300439941c61d88dee34
