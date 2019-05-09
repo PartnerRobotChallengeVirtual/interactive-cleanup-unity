@@ -80,7 +80,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		private Dictionary<RelocatableObjectInfo, GameObject> destinationsPositionsMap; //key:DestinationPositionInfo, value:Graspables
 
 		private GameObject robot;
-		private HSRGraspingDetector hsrGraspingDetector;
+		private GraspingDetector hsrGraspingDetector;
 
 		private ExecutionMode executionMode;
 
@@ -183,7 +183,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		{
 			this.robot = GameObject.FindGameObjectWithTag(TagRobot);
 
-			this.hsrGraspingDetector = this.robot.GetComponentInChildren<HSRGraspingDetector>();
+			this.hsrGraspingDetector = this.robot.GetComponentInChildren<GraspingDetector>();
 
 			// Get grasping candidates
 			List<GameObject> graspingCandidates = ExtractGraspingCandidates(environmentInfo);

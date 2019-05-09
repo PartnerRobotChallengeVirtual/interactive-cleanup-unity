@@ -70,7 +70,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		}
 	}
 
-	public class CleanupScoreManager : MonoBehaviour, IHSRCollisionHandler, ITransferredCollisionHandler
+	public class CleanupScoreManager : MonoBehaviour, IRobotCollisionHandler, ITransferredCollisionHandler
 	{
 		private const float DefaultTimeScale = 1.0f;
 
@@ -220,7 +220,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		}
 
 
-		public void OnHsrCollisionEnter(Collision collision, float collisionVelocity, float effectScale)
+		public void OnRobotCollisionEnter(Collision collision, float collisionVelocity, float effectScale)
 		{
 			this.AddScore(Score.Type.HsrCollisionEnter, collision, collisionVelocity);
 		}
