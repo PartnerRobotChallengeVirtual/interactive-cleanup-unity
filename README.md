@@ -25,8 +25,8 @@ See also [wiki page](https://github.com/PartnerRobotChallengeVirtual/interactive
 
 ### Import the Oculus Utilities for Unity
 
-1. Download Oculus Utilities for Unity ver.1.24.0 from the following link. ?
-https://developer.oculus.com/downloads/package/oculus-utilities-for-unity-5/1.24.0/
+1. Download Oculus Utilities for Unity ver.1.28.0 from the following link. 
+https://developer.oculus.com/downloads/package/oculus-utilities-for-unity-5/1.28.0/
 2. Unzip the downloaded file.
 3. Open this project with Unity.
 4. Click [Assets]-[Import Package]-[Custom Package...].
