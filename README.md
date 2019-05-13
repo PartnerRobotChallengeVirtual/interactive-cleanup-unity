@@ -3,7 +3,7 @@
 This is a Unity project for the Interactive Cleanup task of the Partner Robot Challenge (Virtual Space) in the World Robot Competition.
 
 Please prepare a common unitypackage in advance, and import the unitypackage to this project.  
-For details of using the common unitypackage, please see an instruction in the following repository:
+For details of using the common unitypackage, please see an instruction in the following repository:  
 https://github.com/PartnerRobotChallengeVirtual/common-unity.git
 
 See also [wiki page](https://github.com/PartnerRobotChallengeVirtual/interactive-cleanup-unity/wiki).
@@ -25,7 +25,7 @@ See also [wiki page](https://github.com/PartnerRobotChallengeVirtual/interactive
 
 ### Import the Oculus Utilities for Unity
 
-1. Download Oculus Utilities for Unity ver.1.28.0 from the following link. 
+1. Download Oculus Utilities for Unity ver.1.28.0 from the following link.  
 https://developer.oculus.com/downloads/package/oculus-utilities-for-unity-5/1.28.0/
 2. Unzip the downloaded file.
 3. Open this project with Unity.
