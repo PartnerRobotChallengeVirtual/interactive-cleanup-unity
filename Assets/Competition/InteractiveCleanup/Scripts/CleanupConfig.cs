@@ -88,6 +88,12 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 			if (this.configFileInfo.isScoreFileRead)
 			{
+				if (!System.IO.File.Exists(this.scoreFilePath))
+				{
+					SIGVerseLogger.Error("Score file does not exists.");
+					Application.Quit();
+				}
+
 				// File open
 				StreamReader streamReader = new StreamReader(scoreFilePath, Encoding.UTF8);
 
