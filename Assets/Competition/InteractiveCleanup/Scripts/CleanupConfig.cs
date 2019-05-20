@@ -63,7 +63,8 @@ namespace SIGVerse.Competition.InteractiveCleanup
 			}
 			else
 			{
-				SIGVerseLogger.Warn("Cleanup config file does not exists.");
+#if UNITY_EDITOR
+				SIGVerseLogger.Warn("Interactive Cleanup config file does not exists.");
 
 				this.configFileInfo.teamName          = "XXXX";
 				this.configFileInfo.sessionTimeLimit  = 360;
@@ -74,6 +75,10 @@ namespace SIGVerse.Competition.InteractiveCleanup
 				this.configFileInfo.playbackType      = CleanupPlaybackCommon.PlaybackTypeRecord;
 
 				this.SaveConfig();
+#else
+				SIGVerseLogger.Error("Interactive Cleanup config file does not exists.");
+				Application.Quit();
+#endif
 			}
 
 			// Initialize common parameter
