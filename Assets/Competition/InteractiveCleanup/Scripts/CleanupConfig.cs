@@ -12,12 +12,13 @@ namespace SIGVerse.Competition.InteractiveCleanup
 	public class CleanupConfigFileInfo
 	{
 		public string teamName;
-		public int  sessionTimeLimit;
-		public int  maxNumberOfTrials;
-		public bool isScoreFileRead;
-		public int  executionMode;
-		public bool isAlwaysGoNext;
-		public int  playbackType;
+		public int    sessionTimeLimit;
+		public int    maxNumberOfTrials;
+		public bool   isScoreFileRead;
+		public int    executionMode;
+		public bool   isAlwaysGoNext;
+		public int    playbackType;
+		public float  bgmVolume;
 	}
 
 	public enum ExecutionMode
@@ -73,6 +74,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 				this.configFileInfo.executionMode     = (int)ExecutionMode.Competition;
 				this.configFileInfo.isAlwaysGoNext    = false;
 				this.configFileInfo.playbackType      = CleanupPlaybackCommon.PlaybackTypeRecord;
+				this.configFileInfo.bgmVolume         = 0.01f;
 
 				this.SaveConfig();
 #else

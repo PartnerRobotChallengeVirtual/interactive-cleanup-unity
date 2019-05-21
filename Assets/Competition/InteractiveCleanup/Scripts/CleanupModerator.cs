@@ -66,6 +66,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		public GameObject playbackManager;
 
 		public AudioSource objectCollisionAudioSource;
+		public AudioSource bgmAudioSource;
 
 		public Laser laserLeft;
 		public Laser laserRight;
@@ -145,6 +146,8 @@ namespace SIGVerse.Competition.InteractiveCleanup
 
 				StartCoroutine(this.tool.LoosenRigidbodyConstraints(rigidbody));
 			}
+
+			this.bgmAudioSource.volume = Mathf.Clamp01(CleanupConfig.Instance.configFileInfo.bgmVolume);
 		}
 
 
@@ -481,6 +484,8 @@ namespace SIGVerse.Competition.InteractiveCleanup
 				+ "(" + SIGVerseUtils.GetOrdinal(CleanupConfig.Instance.numberOfTrials) + ": " + this.lastPanelMessage.Replace("\n", " - ") + ")";
 
 			this.SendPanelNotice(panelMessage, 80, PanelNoticeStatus.Blue);
+
+			this.bgmAudioSource.enabled = false;
 		}
 
 

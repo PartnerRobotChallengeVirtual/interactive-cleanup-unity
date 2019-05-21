@@ -5,5 +5,6 @@
     "isScoreFileRead": false,
     "executionMode": 0,
     "isAlwaysGoNext": false,
-    "playbackType": 1
+    "playbackType": 1,
+    "bgmVolume": 0.01
 }
