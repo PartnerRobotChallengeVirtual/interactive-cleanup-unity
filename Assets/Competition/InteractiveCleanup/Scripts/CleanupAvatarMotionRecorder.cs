@@ -31,7 +31,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		{
 			if (this.step == Step.Recording)
 			{
-				this.dataLines.Add(this.GetEventDataLine(CleanupAvatarMotionCommon.DataType1CleanupMsgPointByLeft));
+				base.AddDataLine(this.GetEventDataLine(CleanupAvatarMotionCommon.DataType1CleanupMsgPointByLeft));
 			}
 		}
 
@@ -39,7 +39,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		{
 			if (this.step == Step.Recording)
 			{
-				this.dataLines.Add(this.GetEventDataLine(CleanupAvatarMotionCommon.DataType1CleanupMsgPointByRight));
+				base.AddDataLine(this.GetEventDataLine(CleanupAvatarMotionCommon.DataType1CleanupMsgPointByRight));
 			}
 		}
 
@@ -47,7 +47,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		{
 			if (this.step == Step.Recording)
 			{
-				this.dataLines.Add(this.GetEventDataLine(CleanupAvatarMotionCommon.DataType1CleanupMsgPressA));
+				base.AddDataLine(this.GetEventDataLine(CleanupAvatarMotionCommon.DataType1CleanupMsgPressA));
 			}
 		}
 
@@ -55,7 +55,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		{
 			if (this.step == Step.Recording)
 			{
-				this.dataLines.Add(this.GetEventDataLine(CleanupAvatarMotionCommon.DataType1CleanupMsgPressX));
+				base.AddDataLine(this.GetEventDataLine(CleanupAvatarMotionCommon.DataType1CleanupMsgPressX));
 			}
 		}
 	}
