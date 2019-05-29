@@ -691,7 +691,7 @@ GameObject:
   - component: {fileID: 30856019}
   - component: {fileID: 30856020}
   m_Layer: 2
-  m_Name: JudgeTriggers
+  m_Name: JudgeTriggerOn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2754,7 +2754,7 @@ GameObject:
   - component: {fileID: 168861117}
   - component: {fileID: 168861118}
   m_Layer: 2
-  m_Name: JudgeTriggers
+  m_Name: JudgeTriggerOn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5277,7 +5277,7 @@ GameObject:
   - component: {fileID: 281056032}
   - component: {fileID: 281056033}
   m_Layer: 2
-  m_Name: JudgeTriggers
+  m_Name: JudgeTriggerOn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24915,7 +24915,7 @@ GameObject:
   - component: {fileID: 1363746823}
   - component: {fileID: 1363746824}
   m_Layer: 2
-  m_Name: JudgeTriggers
+  m_Name: JudgeTriggerIn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30232,7 +30232,7 @@ GameObject:
   - component: {fileID: 1692584137}
   - component: {fileID: 1692584138}
   m_Layer: 2
-  m_Name: JudgeTriggers
+  m_Name: JudgeTriggerOn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30617,7 +30617,7 @@ GameObject:
   - component: {fileID: 1715526393}
   - component: {fileID: 1715526394}
   m_Layer: 2
-  m_Name: JudgeTriggers
+  m_Name: JudgeTriggerIn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34386,7 +34386,7 @@ GameObject:
   - component: {fileID: 1917627932}
   - component: {fileID: 1917627933}
   m_Layer: 2
-  m_Name: JudgeTriggers
+  m_Name: JudgeTriggerOn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38907,7 +38907,7 @@ GameObject:
   - component: {fileID: 2082828960}
   - component: {fileID: 2082828961}
   m_Layer: 2
-  m_Name: JudgeTriggers
+  m_Name: JudgeTriggerIn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

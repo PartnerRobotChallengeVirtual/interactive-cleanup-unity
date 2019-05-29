@@ -56,7 +56,8 @@ namespace SIGVerse.Competition.InteractiveCleanup
 		private const string TagGraspingCandidatesPosition = "GraspingCandidatesPosition";
 		private const string TagDestinationCandidates      = "DestinationCandidates";
 
-		private const string JudgeTriggersName = "JudgeTriggers";
+		private const string JudgeTriggerNameOn = "JudgeTriggerOn";
+		private const string JudgeTriggerNameIn = "JudgeTriggerIn";
 
 		public const string SpeechExePath  = "../TTS/ConsoleSimpleTTS.exe";
 		public const string SpeechLanguage = "409";
@@ -331,11 +332,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 					if (this.destination == null) { throw new Exception("Destination not found. name=" + environmentInfo.destinationName); }
 
 					// Add Placement checker to triggers
-					Transform judgeTriggersTransform = this.destination.transform.Find(JudgeTriggersName);
-
-					if (judgeTriggersTransform==null) { throw new Exception("No Judge Triggers object"); }
-
-					judgeTriggersTransform.gameObject.AddComponent<PlacementChecker>();
+					this.AddPlacementChecker(this.destination);
 
 
 					// Destination candidates position map
@@ -409,6 +406,27 @@ namespace SIGVerse.Competition.InteractiveCleanup
 			this.isPlacementSucceeded   = null;
 
 			this.ResetPointingStatus();
+		}
+
+		private void AddPlacementChecker(GameObject destination)
+		{
+			// Add Placement checker to triggers
+			Transform judgeTriggerOn = destination.transform.Find(JudgeTriggerNameOn);
+			Transform judgeTriggerIn = destination.transform.Find(JudgeTriggerNameIn);
+
+			if (judgeTriggerOn == null && judgeTriggerIn == null) { throw new Exception("No JudgeTrigger. name=" + destination.name); }
+			if (judgeTriggerOn != null && judgeTriggerIn != null) { throw new Exception("Too many JudgeTrigger. name=" + destination.name); }
+
+			if (judgeTriggerOn != null)
+			{
+				PlacementChecker placementChecker = judgeTriggerOn.gameObject.AddComponent<PlacementChecker>();
+				placementChecker.Initialize(PlacementChecker.JudgeType.On);
+			}
+			if (judgeTriggerIn != null)
+			{
+				PlacementChecker placementChecker = judgeTriggerIn.gameObject.AddComponent<PlacementChecker>();
+				placementChecker.Initialize(PlacementChecker.JudgeType.In);
+			}
 		}
 
 
@@ -968,13 +986,9 @@ namespace SIGVerse.Competition.InteractiveCleanup
 							this.destination           = laser.nearestDestination;
 
 							// Add Placement checker to triggers
-							Transform judgeTriggersTransform = this.destination.transform.Find(JudgeTriggersName);
-
-							if (judgeTriggersTransform==null) { throw new Exception("No Judge Triggers object"); }
-
-							if(judgeTriggersTransform.GetComponent<PlacementChecker>()==null)
+							if(this.destination.GetComponentInChildren<PlacementChecker>()==null)
 							{
-								judgeTriggersTransform.gameObject.AddComponent<PlacementChecker>();
+								this.AddPlacementChecker(this.destination);
 							}
 					
 							break;
