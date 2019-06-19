@@ -144,7 +144,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 				// For data generation. 
 				case ExecutionMode.DataGeneration:
 				{
-					GameObject activeEnvironment = (from environment in environments where environment.activeSelf==true select environment).FirstOrDefault();
+					GameObject activeEnvironment = (from environment in environments where environment.activeSelf==true select environment).SingleOrDefault();
 
 					if(activeEnvironment!=null)
 					{
@@ -542,7 +542,7 @@ namespace SIGVerse.Competition.InteractiveCleanup
 			}
 			catch (Exception)
 			{
-				SIGVerseLogger.Warn("Do nothing even if an error occurs");
+				SIGVerseLogger.Warn("Couldn't terminate the speech process, but do nothing.");
 				// Do nothing even if an error occurs
 			}
 
