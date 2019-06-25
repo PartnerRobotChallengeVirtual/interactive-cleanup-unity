@@ -192,7 +192,7 @@ GameObject:
   - component: {fileID: 7150833}
   - component: {fileID: 7150835}
   - component: {fileID: 7150834}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cylinder.007_Cylinder.007_Silver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -516,7 +516,7 @@ GameObject:
   - component: {fileID: 24558259}
   - component: {fileID: 24558258}
   - component: {fileID: 24558257}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: toy_car#1
   m_TagString: GraspingCandidates
   m_Icon: {fileID: 0}
@@ -1181,7 +1181,7 @@ GameObject:
   - component: {fileID: 75705195}
   - component: {fileID: 75705197}
   - component: {fileID: 75705196}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cylinder.003_Cylinder.003_Silver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1260,7 +1260,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 76471773}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: cup_c01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1295,7 +1295,7 @@ GameObject:
   m_Component:
   - component: {fileID: 80325259}
   - component: {fileID: 80325260}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: soy_full_Prim.01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1642,7 +1642,7 @@ GameObject:
   - component: {fileID: 101391910}
   - component: {fileID: 101391909}
   - component: {fileID: 101391908}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: empty_ketchup#1
   m_TagString: GraspingCandidates
   m_Icon: {fileID: 0}
@@ -1743,7 +1743,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 120256713}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2220,7 +2220,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 154222451}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: toy_MokuRed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2336,7 +2336,7 @@ GameObject:
   m_Component:
   - component: {fileID: 158960651}
   - component: {fileID: 158960652}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: hourglass#1
   m_TagString: GraspingCandidates
   m_Icon: {fileID: 0}
@@ -3935,7 +3935,7 @@ GameObject:
   - component: {fileID: 227086579}
   - component: {fileID: 227086581}
   - component: {fileID: 227086580}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube.003_Cube.003_Silver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4016,7 +4016,7 @@ GameObject:
   - component: {fileID: 227156095}
   - component: {fileID: 227156097}
   - component: {fileID: 227156096}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cylinder.010_Cylinder.010_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4809,7 +4809,7 @@ GameObject:
   - component: {fileID: 264233194}
   - component: {fileID: 264233196}
   - component: {fileID: 264233195}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Columns_Cylinder.004_Wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6158,7 +6158,7 @@ GameObject:
   - component: {fileID: 301679018}
   - component: {fileID: 301679020}
   - component: {fileID: 301679019}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cylinder.005_Cylinder.005_Black
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6342,7 +6342,7 @@ GameObject:
   - component: {fileID: 305734329}
   - component: {fileID: 305734328}
   - component: {fileID: 305734327}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Base_Cylinder.002_Wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8193,7 +8193,7 @@ GameObject:
   m_Component:
   - component: {fileID: 406613724}
   - component: {fileID: 406613725}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ketchup_full_Prim.01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8736,7 +8736,7 @@ GameObject:
   - component: {fileID: 440044814}
   - component: {fileID: 440044816}
   - component: {fileID: 440044815}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: rubik3_scrambled_Cube.000_white
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8817,7 +8817,7 @@ GameObject:
   - component: {fileID: 445641845}
   - component: {fileID: 445641847}
   - component: {fileID: 445641846}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cylinder.002_Cylinder.002_Black
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9574,7 +9574,7 @@ GameObject:
   - component: {fileID: 516177201}
   - component: {fileID: 516177203}
   - component: {fileID: 516177202}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: rubik3_scrambled_Cube.000_orange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10094,7 +10094,7 @@ GameObject:
   m_Component:
   - component: {fileID: 557571337}
   - component: {fileID: 557571338}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ketchup_empty_Prim.01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10142,7 +10142,7 @@ GameObject:
   m_Component:
   - component: {fileID: 563093099}
   - component: {fileID: 563093100}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: rubik's_cube#1
   m_TagString: GraspingCandidates
   m_Icon: {fileID: 0}
@@ -10226,7 +10226,7 @@ GameObject:
   m_Component:
   - component: {fileID: 576671946}
   - component: {fileID: 576671947}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ketchup_empty_Prim.03*
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10274,7 +10274,7 @@ GameObject:
   m_Component:
   - component: {fileID: 583414894}
   - component: {fileID: 583414895}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: apple_Prim.01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10791,7 +10791,7 @@ GameObject:
   m_Component:
   - component: {fileID: 609393752}
   - component: {fileID: 609393753}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Prim.01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11280,7 +11280,7 @@ GameObject:
   - component: {fileID: 637758197}
   - component: {fileID: 637758196}
   - component: {fileID: 637758195}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: sauce#1
   m_TagString: GraspingCandidates
   m_Icon: {fileID: 0}
@@ -11429,7 +11429,7 @@ GameObject:
   - component: {fileID: 642632340}
   - component: {fileID: 642632342}
   - component: {fileID: 642632341}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: rubik3_scrambled_Cube.000_blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11568,7 +11568,7 @@ GameObject:
   - component: {fileID: 646581557}
   - component: {fileID: 646581559}
   - component: {fileID: 646581558}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: rubik3_scrambled_Cube.000_yellow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12193,7 +12193,7 @@ GameObject:
   - component: {fileID: 690341574}
   - component: {fileID: 690341576}
   - component: {fileID: 690341575}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube.002_Cube.002_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12355,7 +12355,7 @@ GameObject:
   - component: {fileID: 704099039}
   - component: {fileID: 704099041}
   - component: {fileID: 704099040}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube_Cube_Black
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12438,7 +12438,7 @@ GameObject:
   - component: {fileID: 704455566}
   - component: {fileID: 704455565}
   - component: {fileID: 704455564}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: empty_plastic_bottle#1
   m_TagString: GraspingCandidates
   m_Icon: {fileID: 0}
@@ -12664,7 +12664,7 @@ GameObject:
   - component: {fileID: 709994705}
   - component: {fileID: 709994704}
   - component: {fileID: 709994703}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: filled_ketchup#1
   m_TagString: GraspingCandidates
   m_Icon: {fileID: 0}
@@ -12767,7 +12767,7 @@ GameObject:
   m_Component:
   - component: {fileID: 712429924}
   - component: {fileID: 712429925}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: cup_c02_Prim.01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13045,7 +13045,7 @@ GameObject:
   - component: {fileID: 751310934}
   - component: {fileID: 751310933}
   - component: {fileID: 751310932}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: filled_plastic_bottle#1
   m_TagString: GraspingCandidates
   m_Icon: {fileID: 0}
@@ -13785,7 +13785,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 774971850}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: bin_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13905,7 +13905,7 @@ GameObject:
   - component: {fileID: 799021937}
   - component: {fileID: 799021939}
   - component: {fileID: 799021938}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Glass_Cylinder.001_Glass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14276,7 +14276,7 @@ GameObject:
   - component: {fileID: 813977997}
   - component: {fileID: 813977996}
   - component: {fileID: 813977995}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: white_cup#1
   m_TagString: GraspingCandidates
   m_Icon: {fileID: 0}
@@ -14992,7 +14992,7 @@ GameObject:
   - component: {fileID: 839317203}
   - component: {fileID: 839317202}
   - component: {fileID: 839317201}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: bear_doll#1
   m_TagString: GraspingCandidates
   m_Icon: {fileID: 0}
@@ -15731,7 +15731,7 @@ GameObject:
   - component: {fileID: 874811105}
   - component: {fileID: 874811104}
   - component: {fileID: 874811103}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: apple#1
   m_TagString: GraspingCandidates
   m_Icon: {fileID: 0}
@@ -15959,7 +15959,7 @@ GameObject:
   - component: {fileID: 884086621}
   - component: {fileID: 884086620}
   - component: {fileID: 884086619}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube_Cube_Grey
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16497,7 +16497,7 @@ GameObject:
   m_Component:
   - component: {fileID: 947635430}
   - component: {fileID: 947635431}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: soy_full_Prim.04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16545,7 +16545,7 @@ GameObject:
   m_Component:
   - component: {fileID: 949864574}
   - component: {fileID: 949864575}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Sphere04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17364,7 +17364,7 @@ GameObject:
   - component: {fileID: 992837514}
   - component: {fileID: 992837513}
   - component: {fileID: 992837512}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18249,7 +18249,7 @@ GameObject:
   - component: {fileID: 1028714622}
   - component: {fileID: 1028714624}
   - component: {fileID: 1028714623}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube.001_Cube.001_Black
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18532,7 +18532,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1038995482}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: hourglass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18571,7 +18571,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1039368510}
   - component: {fileID: 1039368511}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: dog_doll#1
   m_TagString: GraspingCandidates
   m_Icon: {fileID: 0}
@@ -19900,7 +19900,7 @@ GameObject:
   - component: {fileID: 1099661188}
   - component: {fileID: 1099661187}
   - component: {fileID: 1099661186}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: nursing_bottle#1
   m_TagString: GraspingCandidates
   m_Icon: {fileID: 0}
@@ -20294,7 +20294,7 @@ GameObject:
   - component: {fileID: 1107423725}
   - component: {fileID: 1107423727}
   - component: {fileID: 1107423726}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cylinder.009_Cylinder.009_Black
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20534,7 +20534,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1113683552}
   - component: {fileID: 1113683553}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: camera#1
   m_TagString: GraspingCandidates
   m_Icon: {fileID: 0}
@@ -20616,7 +20616,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1117895848}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: rubik's_cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21713,7 +21713,7 @@ GameObject:
   - component: {fileID: 1173717817}
   - component: {fileID: 1173717819}
   - component: {fileID: 1173717818}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Sand_grain_Icosphere_Sand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22673,7 +22673,7 @@ GameObject:
   - component: {fileID: 1221542415}
   - component: {fileID: 1221542414}
   - component: {fileID: 1221542413}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ground_pepper#1
   m_TagString: GraspingCandidates
   m_Icon: {fileID: 0}
@@ -22871,7 +22871,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1225036181}
   - component: {fileID: 1225036182}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: toy_D_Prim.02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23689,7 +23689,7 @@ GameObject:
   - component: {fileID: 1279188929}
   - component: {fileID: 1279188931}
   - component: {fileID: 1279188930}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube.004_Cube.004_Black
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24267,7 +24267,7 @@ GameObject:
   - component: {fileID: 1331968429}
   - component: {fileID: 1331968431}
   - component: {fileID: 1331968430}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: dog_doll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24348,7 +24348,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1333197670}
   - component: {fileID: 1333197671}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ketchup_full_Prim.02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24834,7 +24834,7 @@ GameObject:
   - component: {fileID: 1362237574}
   - component: {fileID: 1362237576}
   - component: {fileID: 1362237575}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cylinder.001_Cylinder.001_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25152,7 +25152,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1376155995}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: toy_MokuSiro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25194,7 +25194,7 @@ GameObject:
   - component: {fileID: 1385393963}
   - component: {fileID: 1385393962}
   - component: {fileID: 1385393961}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25399,7 +25399,7 @@ GameObject:
   - component: {fileID: 1390487695}
   - component: {fileID: 1390487697}
   - component: {fileID: 1390487696}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: rubik3_scrambled_Cube.000_red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25480,7 +25480,7 @@ GameObject:
   - component: {fileID: 1392332417}
   - component: {fileID: 1392332419}
   - component: {fileID: 1392332418}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25542,7 +25542,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1392612603}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: toy_kuro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25779,7 +25779,7 @@ GameObject:
   - component: {fileID: 1411206336}
   - component: {fileID: 1411206335}
   - component: {fileID: 1411206334}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: sugar#1
   m_TagString: GraspingCandidates
   m_Icon: {fileID: 0}
@@ -26052,7 +26052,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1440388430}
   - component: {fileID: 1440388431}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: cup_c02_Prim.02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26369,7 +26369,7 @@ GameObject:
   - component: {fileID: 1451527226}
   - component: {fileID: 1451527228}
   - component: {fileID: 1451527227}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: rabbit_doll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27037,7 +27037,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1519004213}
   - component: {fileID: 1519004214}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ketchup_empty_Prim.02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27479,7 +27479,7 @@ GameObject:
   - component: {fileID: 1547191636}
   - component: {fileID: 1547191638}
   - component: {fileID: 1547191637}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cylinder.006_Cylinder.006_Silver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27561,7 +27561,7 @@ GameObject:
   - component: {fileID: 1547492041}
   - component: {fileID: 1547492040}
   - component: {fileID: 1547492039}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: soysauce#1
   m_TagString: GraspingCandidates
   m_Icon: {fileID: 0}
@@ -27664,7 +27664,7 @@ GameObject:
   - component: {fileID: 1547767934}
   - component: {fileID: 1547767933}
   - component: {fileID: 1547767932}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: clock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27758,7 +27758,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1555421516}
   - component: {fileID: 1555421517}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: soy_full_Prim.03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28017,7 +28017,7 @@ GameObject:
   - component: {fileID: 1577766710}
   - component: {fileID: 1577766709}
   - component: {fileID: 1577766708}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: tumbler#1
   m_TagString: GraspingCandidates
   m_Icon: {fileID: 0}
@@ -28829,7 +28829,7 @@ GameObject:
   - component: {fileID: 1637838866}
   - component: {fileID: 1637838865}
   - component: {fileID: 1637838864}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: toy_duck#1
   m_TagString: GraspingCandidates
   m_Icon: {fileID: 0}
@@ -29071,7 +29071,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1639562179}
   - component: {fileID: 1639562180}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: cup_c01_Prim.01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29404,7 +29404,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1651709646}
   - component: {fileID: 1651709647}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: soy_full_Prim.02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29697,7 +29697,7 @@ GameObject:
   - component: {fileID: 1665389705}
   - component: {fileID: 1665389707}
   - component: {fileID: 1665389706}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cylinder.008_Cylinder.008_Silver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30069,7 +30069,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1683262046}
   - component: {fileID: 1683262047}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: toy_D_Prim.01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30536,7 +30536,7 @@ GameObject:
   - component: {fileID: 1715098454}
   - component: {fileID: 1715098456}
   - component: {fileID: 1715098455}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Glass.001_Cylinder.006_Glass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30663,7 +30663,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1719931547}
   - component: {fileID: 1719931548}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: rabbit_doll#1
   m_TagString: GraspingCandidates
   m_Icon: {fileID: 0}
@@ -30821,7 +30821,7 @@ GameObject:
   - component: {fileID: 1750163570}
   - component: {fileID: 1750163572}
   - component: {fileID: 1750163571}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: rubik3_scrambled_Cube.000_green
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30936,7 +30936,7 @@ GameObject:
   - component: {fileID: 1755073451}
   - component: {fileID: 1755073450}
   - component: {fileID: 1755073449}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: toy_penguin#1
   m_TagString: GraspingCandidates
   m_Icon: {fileID: 0}
@@ -31433,7 +31433,7 @@ GameObject:
   - component: {fileID: 1765884317}
   - component: {fileID: 1765884316}
   - component: {fileID: 1765884315}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cylinder_Cylinder_Grey
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32067,7 +32067,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1798331987}
   - component: {fileID: 1798331988}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: toy_D_Prim.03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32422,7 +32422,7 @@ GameObject:
   - component: {fileID: 1818304651}
   - component: {fileID: 1818304653}
   - component: {fileID: 1818304652}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cylinder.004_Cylinder.004_Black
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32836,8 +32836,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1845288455}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.17, y: 1.2, z: -5.9}
-  m_LocalScale: {x: 15, y: 2.5, z: 0.5}
+  m_LocalPosition: {x: -1.17, y: 1.2, z: -6.1}
+  m_LocalScale: {x: 15, y: 2.5, z: 0.9}
   m_Children: []
   m_Father: {fileID: 841498672}
   m_RootOrder: 6
@@ -33222,7 +33222,7 @@ GameObject:
   - component: {fileID: 1867979077}
   - component: {fileID: 1867979076}
   - component: {fileID: 1867979075}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: salt#1
   m_TagString: GraspingCandidates
   m_Icon: {fileID: 0}
@@ -34068,7 +34068,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1901942919}
   - component: {fileID: 1901942920}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: toy_D_Prim.04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34305,7 +34305,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1912096053}
   - component: {fileID: 1912096054}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34432,7 +34432,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1918532674}
   - component: {fileID: 1918532675}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Sphere01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34709,7 +34709,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1923040038}
   - component: {fileID: 1923040039}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ketchup_full_Prim.03*
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35421,7 +35421,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1951539202}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: pink_cup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36443,7 +36443,7 @@ GameObject:
   - component: {fileID: 1998409459}
   - component: {fileID: 1998409458}
   - component: {fileID: 1998409457}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36829,7 +36829,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2019273554}
   - component: {fileID: 2019273555}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Sphere03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36876,7 +36876,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2022822280}
   - component: {fileID: 2022822281}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Sphere02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37062,7 +37062,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2027573524}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: phong2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37469,7 +37469,7 @@ GameObject:
   - component: {fileID: 2041683304}
   - component: {fileID: 2041683303}
   - component: {fileID: 2041683302}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: cigarette#1
   m_TagString: GraspingCandidates
   m_Icon: {fileID: 0}
@@ -38317,7 +38317,7 @@ GameObject:
   - component: {fileID: 2066040031}
   - component: {fileID: 2066040030}
   - component: {fileID: 2066040029}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38955,7 +38955,7 @@ GameObject:
   - component: {fileID: 2083066602}
   - component: {fileID: 2083066601}
   - component: {fileID: 2083066600}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: pink_cup#1
   m_TagString: GraspingCandidates
   m_Icon: {fileID: 0}
@@ -39150,7 +39150,7 @@ GameObject:
   - component: {fileID: 2100503440}
   - component: {fileID: 2100503439}
   - component: {fileID: 2100503438}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: rubik3_scrambled_Cube.000_black
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39247,7 +39247,7 @@ GameObject:
   - component: {fileID: 2104177683}
   - component: {fileID: 2104177682}
   - component: {fileID: 2104177681}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: canned_juice#1
   m_TagString: GraspingCandidates
   m_Icon: {fileID: 0}
@@ -39393,7 +39393,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2107279527}
   - component: {fileID: 2107279528}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: cubic_clock#1
   m_TagString: GraspingCandidates
   m_Icon: {fileID: 0}
@@ -39527,7 +39527,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2111340756}
   - component: {fileID: 2111340757}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: cup_c01_Prim.02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40335,7 +40335,7 @@ GameObject:
   - component: {fileID: 2132562148}
   - component: {fileID: 2132562150}
   - component: {fileID: 2132562149}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GlassLowPoly_Cylinder.000_Glass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40404,63 +40404,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2132562147}
   m_Mesh: {fileID: 4300008, guid: e2391649fda8a804e90dbc5f10a5e42b, type: 3}
---- !u!1 &2584144580672065112
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2584144580672065119}
-  - component: {fileID: 2584144580672065118}
-  m_Layer: 0
-  m_Name: TargetPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1773428102 &2584144580672065118
-ParentConstraint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2584144580672065112}
-  m_Enabled: 1
-  m_Weight: 1
-  m_TranslationAtRest: {x: -0.05846131, y: 0.09285195, z: 0.8601783}
-  m_RotationAtRest: {x: 10.877221, y: 117.73038, z: -109.74658}
-  m_TranslationOffsets:
-  - {x: -0.21632028, y: 0.30105948, z: 0.24129486}
-  m_RotationOffsets:
-  - {x: 0.051711112, y: 1.8356206, z: -3.2286868}
-  m_AffectTranslationX: 1
-  m_AffectTranslationY: 1
-  m_AffectTranslationZ: 1
-  m_AffectRotationX: 1
-  m_AffectRotationY: 1
-  m_AffectRotationZ: 1
-  m_IsContraintActive: 1
-  m_IsLocked: 0
-  m_Sources:
-  - sourceTransform: {fileID: 1524766279}
-    weight: 1
---- !u!4 &2584144580672065119
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2584144580672065112}
-  m_LocalRotation: {x: -0.6687194, y: 0.53036785, z: -0.467664, w: 0.22981462}
-  m_LocalPosition: {x: -0.05846131, y: 0.09285195, z: 0.8601783}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
-  m_Children: []
-  m_Father: {fileID: 2584144581977863613}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1773428102 &2584144581977863602
 ParentConstraint:
   m_ObjectHideFlags: 0
@@ -40509,7 +40452,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.5
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -40547,8 +40490,7 @@ Transform:
   m_LocalRotation: {x: 0.08179141, y: -0.8528885, z: 0.14061359, w: 0.49610394}
   m_LocalPosition: {x: -1.0718, y: 1.081, z: -2.5038}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 2584144580672065119}
+  m_Children: []
   m_Father: {fileID: 587772706}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 18.724, y: -119.629005, z: 0}
@@ -40564,6 +40506,7 @@ GameObject:
   - component: {fileID: 2584144581977863603}
   - component: {fileID: 2584144581977863612}
   - component: {fileID: 2584144581977863602}
+  - component: {fileID: 2584144581977863615}
   m_Layer: 0
   m_Name: TorsoTrackingCamera
   m_TagString: AudienceCamera
@@ -40571,3 +40514,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &2584144581977863615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2584144581977863614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44ee52ef8c4b595418b24bb1d8584f88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rayTarget: {fileID: 1524766279}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 279
